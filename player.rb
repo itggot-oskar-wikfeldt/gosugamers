@@ -9,6 +9,7 @@ class Player
     @velY = 0
     @accelX = 0
     @accelY = 0
+    @max_speed = 20
     @texture = Gosu::Image.new('./res/bunny.png')
   end
   def fall
@@ -21,17 +22,28 @@ class Player
 
   end
   def accelerate
-    @velX += @accelX
-    @velY += @accelY
+    @velX += @accelX if @velX.abs < @max_speed
+    @velY += @accelY if @velY.abs < @max_speed
   end
-
+  def decellerate
+    if @accelX.abs > 0.5
+      @accelX > 0 ? @accelX -= 1 : @accelX += 1
+    end
+  end
   def move
     @x += @velX
     @y += @velY
   end
 
   def update
+    if (Gosu::button_down? Gosu::KbLeft) && (@accelX > -7)
+      @accelX -= 1
+    end
+    if (Gosu::button_down? Gosu::KbRight) && (@accelX < 7)
+      @accelX += 1
+    end
     fall
+    decellerate
     accelerate
     move
 
