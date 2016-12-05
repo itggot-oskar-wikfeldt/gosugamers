@@ -12,7 +12,7 @@ class GameWindow < Gosu::Window
   end
 
   def update
-
+    @player.update
 
 
 
