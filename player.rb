@@ -1,80 +1,37 @@
-class Player
+require_relative './entity.rb'
+class Player < Entity
   def initialize(x, y)
-    #width = 56
-    #heght = 52
-
-    @x = x
-    @y = y
-    @velX = 0
-    @velY = 0
-    @accelX = 0
-    @accelY = 0
-    @friction = 0.5
-    @max_speed = 10
-    @gravity = 1
-    @has_jumped = false
-    @on_ground = false
-    @left = Gosu::Image.new('./res/bunny_left.png')
-    @right = @texture = Gosu::Image.new('./res/bunny_right.png')
+    super(x, y, Gosu::Image.new('./res/bunny_left.png'), Gosu::Image.new('./res/bunny_right.png'))
+    @prev_dir_right = true
+    @dir_right = true
   end
-  def fall
-    if !@on_ground
-      @accelY = @gravity
-    else
-      @accelY = 0
-      @velY = 0
-      @has_jumped = false
-    end
-  end
-  def accelerate
-    if @velX.abs < @max_speed
-      @velX += @accelX
-    end
-    @velY += @accelY
-  end
-  def decellerate
-    if @velX.abs > 0.1
-      @velX > 0 ? @velX -= @friction : @velX += @friction
-    else
-      @velX = 0
-    end
-
-  end
-  def move
-    @x += @velX
-    @y += @velY
-  end
-
+  attr_accessor :x
   def update
 
     @accelX = 0
-    decellerate
     if Gosu::button_down? Gosu::KbLeft
-      @accelX = -1
-      @texture = @left
+      go_left
+      @dir_right = false
+      if @prev_dir_right != @dir_right
+        @velX = 0
+        @prev_dir_right = @dir_right
+      end
     end
 
     if Gosu::button_down? Gosu::KbRight
-      @texture = @right
-      @accelX = 1
+      go_right
+      @dir_right = true
+      if @prev_dir_right != @dir_right
+        @velX = 0
+        @prev_dir_right = @dir_right
+      end
     end
-    if (Gosu::button_down? Gosu::KbUp) && @has_jumped == false
-      @velY = -15
-      @has_jumped = true
+    if (Gosu::button_down? Gosu::KbSpace or Gosu::button_down? Gosu::KbUp)
+      jump
     end
-    @y+52+@velY < 480-48 ? @on_ground = false : @on_ground = true
-    fall
-    accelerate
-    move
-    p @has_jumped
-
-
-
-
-
+    super
   end
-
   def draw
-    @texture.draw(@x, @y, 0)
+    super
   end
 end
