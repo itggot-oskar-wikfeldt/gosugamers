@@ -1,3 +1,4 @@
+require_relative './camera.rb'
 require_relative './game_window.rb'
 class Entity
   def initialize(x, y, left_tex, right_tex)
@@ -25,7 +26,9 @@ class Entity
 
   end
 
-
+  attr_accessor :x
+  attr_accessor :y
+  attr_reader :width
 
   def fall
     if !@on_ground
@@ -97,7 +100,7 @@ class Entity
   end
 
   def draw
-    @texture.draw(@x, @y, 0)
+    @texture.draw(@x + $offsetX, @y + $offsetY, 0)
   end
 
 end

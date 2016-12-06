@@ -5,7 +5,7 @@ class Player < Entity
     @prev_dir_right = true
     @dir_right = true
   end
-  attr_accessor :x
+
   def update
 
     @accelX = 0
