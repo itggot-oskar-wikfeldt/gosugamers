@@ -3,20 +3,19 @@ require_relative './game_window.rb'
 class Enemy < Entity
   def initialize(x, y, target)
     super(x, y, Gosu::Image.new('./res/slime.png'), Gosu::Image.new('./res/slime.png'))
-    @width = 56
-    @height = 39
+    @width = 48
+    @height = 33
     @max_speed = 10
     @acceleration = 1
     @touched_left_edge = true
     @touched_right_edge = false
-    @gravity = 1
     @going_right = true
     @target = target
   end
   def update
     @accelX = 0
 
-    if rand(70) == 1
+    if rand(100) == 1
       jump
       if @going_right
         @velX = 7
@@ -37,7 +36,7 @@ class Enemy < Entity
       @touched_right_edge = false
     end
 =end
-    if @x > @target.x && @on_ground
+    if @x > @target.x && @collidingY
       @going_right = false
     else
       @going_right = true

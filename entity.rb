@@ -2,8 +2,7 @@ require_relative './camera.rb'
 require_relative './game_window.rb'
 class Entity
   def initialize(x, y, left_tex, right_tex)
-    @width = 56
-    @height = 52
+
     @bound_left = @bound_right = @bound_top = @bound_bottom = 0
 
     @left = left_tex
@@ -11,31 +10,32 @@ class Entity
 
 
 
-    @x = x
-    @y = y
+    @x = @tempX = x
+    @y = @tempY = y
+
+
     @velX = 0
     @velY = 0
     @accelX = 0
     @accelY = 0
-    @acceleration = 0.8
-    @friction = 1
+    @acceleration = 0.7
+    @base_friction = 0.5
     @max_speed = 10
-    @gravity = 1
+    @gravity = 0.8
     @has_jumped = false
-    @on_ground = false
+    @collidingY = false
+    @collidingX = false
 
   end
 
-  attr_accessor :x
-  attr_accessor :y
-  attr_reader :width
+
+  attr_reader :x, :y, :width
 
   def fall
-    if !@on_ground
+    if !@collidingY
       @accelY = @gravity
     else
       @accelY = 0
-      @velY = 0
       @has_jumped = false
     end
   end
@@ -48,22 +48,42 @@ class Entity
   end
 
   def decellerate
-    if @velX.abs > 0.3
-      @velX > 0 ? @velX -= @friction : @velX += @friction
-    else
-      @velX = 0
-    end
+    if @velX.abs > @friction
+      if @velX > 0
+        @velX -= @friction
+      end
+
+      if @velX < 0
+        @velX += @friction
+      end
+    else @velX = 0 end
+
+
+
 
   end
 
   def go_left
-    @accelX -=@acceleration
     @texture = @left
+    if @collidingY
+      @accelX -=@acceleration
+    else
+      @accelX -=@acceleration*0.5
+    end
+
+
+
   end
 
   def go_right
     @texture = @right
-    @accelX +=@acceleration
+    if @collidingY
+      @accelX +=@acceleration
+    else
+      @accelX +=@acceleration*0.5
+    end
+
+
   end
 
   def jump
@@ -73,30 +93,57 @@ class Entity
     end
   end
 
-  def move
-    @x += @velX*$delta/20
-    @y += @velY*$delta/20
+  def move()
+    @tempX += @velX#*$delta/20
+    @tempY += @velY#*$delta/20
   end
 
   def update
+    @tempX = @x
+    @tempY = @y
 
-    @bound_left = @x
-    @bound_right = @x + @width
-    @bound_top = @y
-    @bound_bottom = @y + @height
+    @collidingY = true
+    @collidingX = true
 
+    while @collidingY && @collidingX
+      if @collidingY
+        @friction = @base_friction
+      else
+        @friction = 0.1
+      end
 
-    @bound_bottom+@velY < 480-48 ? @on_ground = false : @on_ground = true
-    fall
-    if @on_ground
-      @friction = 0.5
-    else
-      @friction = 0.1
+      #fall
+      @accelY = @gravity
+      decellerate
+      accelerate
+      move
+      @bound_left = @tempX
+      @bound_right = @tempX + @width
+      @bound_top = @tempY
+      @bound_bottom = @tempY + @height
+
+      if (@bound_left<0 or @bound_right>$window_width)
+        @collidingX = true
+      else
+        @collidingX = false
+      end
+
+      if (@bound_bottom > $window_height-48) or (@bound_top < 0)
+        @collidingY = true
+      else
+        @collidingY = false
+      end
+
+      if !@collidingX
+        @x = @tempX
+      end
+      if !@collidingY
+        @y = @tempY
+      end
     end
 
-    decellerate
-    accelerate
-    move
+
+
   end
 
   def draw

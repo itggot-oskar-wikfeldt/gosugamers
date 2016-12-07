@@ -4,10 +4,10 @@ require_relative './enemy.rb'
 require_relative './camera.rb'
 class GameWindow < Gosu::Window
   def initialize(caption)
-    super $window_width = 1920, $window_height = 1080, false
+    super $window_width = 640, $window_height = 480, false
     self.caption = caption
-    @background = Gosu::Image.new('./res/dark_sky.jpg', :tileable => true)
-    @floor = Gosu::Image.new('./res/rocks.jpg')
+    @background = Gosu::Image.new('./res/light_sky.jpg', :tileable => true)
+    @floor = Gosu::Image.new('./res/grass.jpg')
     @player = Player.new(20, 20)
     @enemies = []
     @prev_time = 0.0
@@ -16,14 +16,14 @@ class GameWindow < Gosu::Window
     @fps = 0
     @fps_avg = 0
     @fps_counter = Gosu::Font.new(32)
-    10.times do
+    0.times do
       @enemies << Enemy.new(40,20, @player)
     end
 
   end
 
   def update
-    Camera.update(@player)
+
     $delta = Gosu::milliseconds.to_f-@prev_time
     if @count < 10
       @count +=1
@@ -40,6 +40,7 @@ class GameWindow < Gosu::Window
     @enemies.each do |enemy|
       enemy.update
     end
+    Camera.update(@player)
 
 
 
