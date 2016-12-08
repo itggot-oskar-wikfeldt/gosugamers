@@ -25,6 +25,7 @@ class Entity
     @has_jumped = false
     @collidingY = false
     @collidingX = false
+    @counter = 0
 
   end
 
@@ -87,10 +88,10 @@ class Entity
   end
 
   def jump
-    if !@has_jumped
-      @velY = -15
-      @has_jumped = true
-    end
+
+    @velY = -15
+
+
   end
 
   def move()
@@ -99,13 +100,14 @@ class Entity
   end
 
   def update
-    @tempX = @x
-    @tempY = @y
+
 
     @collidingY = true
     @collidingX = true
 
-    while @collidingY && @collidingX
+    while @collidingY or @collidingX
+      @tempX = @x
+      @tempY = @y
       if @collidingY
         @friction = @base_friction
       else
@@ -116,11 +118,26 @@ class Entity
       @accelY = @gravity
       decellerate
       accelerate
+      if @counter >0
+
+        @velY = @velY.floor
+        if @velY > 0
+          @velY-=1
+        end
+        if @velY < 0
+          @velY+=1
+        end
+
+      end
+      p @velY
+      p @tempY
       move
       @bound_left = @tempX
       @bound_right = @tempX + @width
       @bound_top = @tempY
       @bound_bottom = @tempY + @height
+      p @y
+      p @bound_bottom
 
       if (@bound_left<0 or @bound_right>$window_width)
         @collidingX = true
@@ -140,7 +157,13 @@ class Entity
       if !@collidingY
         @y = @tempY
       end
+
+      @counter += 1
+      p "one loop"
+
     end
+    @counter = 0
+    p "one tick"
 
 
 

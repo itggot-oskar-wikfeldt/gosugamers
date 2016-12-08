@@ -5,7 +5,8 @@ require_relative './camera.rb'
 class GameWindow < Gosu::Window
   def initialize(caption)
     super $window_width = 640, $window_height = 480, false
-    self.caption = caption
+    @caption = caption
+    self.caption = @caption
     @background = Gosu::Image.new('./res/light_sky.jpg', :tileable => true)
     @floor = Gosu::Image.new('./res/grass.jpg')
     @player = Player.new(20, 20)
@@ -33,6 +34,7 @@ class GameWindow < Gosu::Window
       @fps_avg = 0
       @count = 0
     end
+    self.caption = @fps
 
 
     @prev_time = Gosu::milliseconds.to_f

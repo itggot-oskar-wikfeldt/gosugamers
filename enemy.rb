@@ -7,8 +7,8 @@ class Enemy < Entity
     @height = 33
     @max_speed = 10
     @acceleration = 1
-    @touched_left_edge = true
-    @touched_right_edge = false
+    #@touched_left_edge = true
+    #@touched_right_edge = false
     @going_right = true
     @target = target
   end
