@@ -9,27 +9,10 @@ class Player < Entity
   end
 
   def update
-    @accelX = 0
-    if Gosu::button_down? Gosu::KbLeft
-      go_left
-      @dir_right = false
-      if @prev_dir_right != @dir_right
-        @velX = 0
-        @prev_dir_right = @dir_right
-      end
-    end
+    @go_left = true if Gosu::button_down? Gosu::KbLeft
+    @go_right = true if Gosu::button_down? Gosu::KbRight
+    @jump = true if (Gosu::button_down? Gosu::KbSpace or Gosu::button_down? Gosu::KbUp)
 
-    if Gosu::button_down? Gosu::KbRight
-      go_right
-      @dir_right = true
-      if @prev_dir_right != @dir_right
-        @velX = 0
-        @prev_dir_right = @dir_right
-      end
-    end
-    if (Gosu::button_down? Gosu::KbSpace or Gosu::button_down? Gosu::KbUp)
-      jump
-    end
     super
   end
   def draw
