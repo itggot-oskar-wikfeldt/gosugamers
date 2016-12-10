@@ -10,10 +10,16 @@ class GameWindow < Gosu::Window
     @caption = caption
     self.caption = @caption
     @background = Gosu::Image.new('./res/light_sky.jpg', :tileable => true)
-    @block1 = Block.new(0, $window_height-48, $window_width, 48, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
-    @block2 = Block.new(51, 10, 20, 48, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
-    @playerblock = Block.new(50, 150, 42, 39, Gosu::Image.new('./res/pixel.png', :tileable => true), false)
-    @player = Player.new(50, 150)
+    @block4 = Block.new(421, 45, 20, 230, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
+    @block2 = Block.new(400, 45, 20, 230, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
+    @block3 = Block.new(250, 340, 20, 20, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
+    @block1 = Block.new(200, 300, $window_width, 48, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
+
+    @testblock1 = Block.new(200, 300, 30, 30, nil, false)
+    @testblock2 = Block.new(205, 305, 15, 15, nil, false)
+
+
+    @player = Player.new(300, 150)
     @enemies = []
     @prev_time = 0.0
     $delta = 0
@@ -31,7 +37,6 @@ class GameWindow < Gosu::Window
   end
 
   def update
-
     $delta = Gosu::milliseconds.to_f-@prev_time
     if @count < 10
       @count +=1
@@ -56,10 +61,8 @@ class GameWindow < Gosu::Window
 
   def draw
     @background.draw(0, 0, 0)
-    @block1.draw
-    @block2.draw
+    $blocks.each { |block| block.draw }
     @player.draw
-    @playerblock.draw
     @fps_counter.draw(@fps, 0, 0, 0, 1, 1, 0xff_ffffff)
     @enemies.each { draw }
 
