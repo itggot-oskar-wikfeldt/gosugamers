@@ -2,12 +2,11 @@ require_relative './entity.rb'
 require_relative './world.rb'
 require 'gosu'
 class Block < Entity
-  def initialize(x, y, width, height, tex)
-    super(x, y, tex, tex)
+  def initialize(x, y, width, height, tex, collidable)
+    super(x, y, tex, tex, true)
     @width = width
     @height = height
-    $blocks << self
-    @static = true
+    $blocks << self if collidable
   end
   attr_accessor :x, :y
 

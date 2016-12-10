@@ -1,9 +1,11 @@
-require_relative './entity'
+#require_relative './entity'
 class Util
-  def intersects?(entity1, entity2)
-    if (entity1.get_bound('top').between?(entity2.get_bound('top'), entity2.get_bound('bottom')) ||
-        entity1.get_bound('bottom').between?(entity2.get_bound('top'), entity2.get_bound('bottom'))) &&
+  def self.intersects?(entity1, entity2)
 
-    end
+    return ((entity1.get_bound('top').between?(entity2.get_bound('top'), entity2.get_bound('bottom'))) ||
+        (entity1.get_bound('bottom').between?(entity2.get_bound('top'), entity2.get_bound('bottom')))) &&
+        ((entity1.get_bound('left').between?(entity2.get_bound('left'), entity2.get_bound('right'))) ||
+            (entity1.get_bound('right').between?(entity2.get_bound('left'), entity2.get_bound('right'))))
+
   end
 end
