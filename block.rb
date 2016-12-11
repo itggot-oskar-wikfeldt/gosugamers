@@ -3,7 +3,15 @@ require_relative './world.rb'
 
 class Block < Entity
   def initialize(x, y, width, height, tex, collidable)
-    super(x, y, tex, tex, true)
+    if tex == 'stone'
+      tex = Gosu::Image.new('./res/pixel.png', :tileable => true)
+    else
+      tex = Gosu::Image.new('./res/pixel.png', :tileable => true)
+    end
+
+
+
+    super(x, y, [tex], true)
     @width = width
     @height = height
     $blocks << self if collidable

@@ -3,6 +3,7 @@ require_relative './player.rb'
 require_relative './camera.rb'
 require_relative './block.rb'
 require_relative './util.rb'
+require_relative './enemy.rb'
 
 class GameWindow < Gosu::Window
   def initialize(caption)
@@ -10,16 +11,18 @@ class GameWindow < Gosu::Window
     @caption = caption
     self.caption = @caption
     @background = Gosu::Image.new('./res/light_sky.jpg', :tileable => true)
-    @block4 = Block.new(421, 45, 20, 230, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
-    @block2 = Block.new(400, 45, 20, 230, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
-    @block3 = Block.new(250, 340, 20, 20, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
-    @block1 = Block.new(200, 300, $window_width, 48, Gosu::Image.new('./res/pixel.png', :tileable => true), true)
+=begin
+    for i in 0..5 do
+      $blocks << Block.new(i*40+100, i*10+300, 40, 30, 'stone', true)
+    end
+    Block.new(300, 400, 200, 50, 'stone', true)
+=end
+    Block.new(0, 400, $window_width, 50, 'stone', true)
+    Block.new(0, 200, 50, 200, 'stone', true)
+    Block.new($window_width-50, 200, 50, 200, 'stone', true)
 
-    @testblock1 = Block.new(200, 300, 30, 30, nil, false)
-    @testblock2 = Block.new(205, 305, 15, 15, nil, false)
 
-
-    @player = Player.new(300, 150)
+    @player = Player.new(350, 150)
     @enemies = []
     @prev_time = 0.0
     $delta = 0
@@ -29,14 +32,15 @@ class GameWindow < Gosu::Window
 
     @fps_counter = Gosu::Font.new(32)
 
-    0.times do
-      @enemies << Enemy.new(40, 20, @player)
+    3.times do |i|
+      @enemies << Enemy.new(120+60*i, 20, @player)
     end
 
 
   end
 
   def update
+
     $delta = Gosu::milliseconds.to_f-@prev_time
     if @count < 10
       @count +=1
@@ -62,9 +66,10 @@ class GameWindow < Gosu::Window
   def draw
     @background.draw(0, 0, 0)
     $blocks.each { |block| block.draw }
-    @player.draw
     @fps_counter.draw(@fps, 0, 0, 0, 1, 1, 0xff_ffffff)
-    @enemies.each { draw }
+
+    @player.draw
+    @enemies.each { |enemy| enemy.draw }
 
 
   end

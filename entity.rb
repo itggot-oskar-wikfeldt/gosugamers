@@ -4,13 +4,12 @@ require_relative './game_window.rb'
 require_relative './world.rb'
 #require_relative './block.rb'
 class Entity
-  def initialize(x, y, left_tex, right_tex, static)
+  def initialize(x, y, textures, static)
 
     @bound_left = @bound_right = @bound_top = @bound_bottom = 0
-    @collidingX = false
-    @collidingY = false
-    @left = left_tex
-    @right = @texture = right_tex
+    @on_ground = false
+    @texture = textures[0]
+    @textures = textures
     @below
     @above
     @to_the_right
@@ -18,24 +17,35 @@ class Entity
     @static = static
     @x = x
     @y = y
-    @max_speed = 5
+    @max_speed = 6
     @velX = 0
     @velY = 0
     @accelX = 0
     @accelY = 0
     @width = 0
     @height = 0
-    @acceleration = 0.7
+    @acceleration = 0.6
     @air_resistance = 0.1
-    @friction = 0.5
+    @friction = 0.4
     unless @static
       @scanner = Block.new(@x, @y, @width, @height, nil, false)
     end
 
   end
 
-  attr_accessor :x, :y, :width
+  attr_accessor :x, :y, :width, :height
+  def change_tex(tex)
+    if tex == 'right'
+      @texture = @textures[0]
+    elsif tex == 'left'
+      @texture = @textures[1]
+    elsif tex == 'up'
+      @texture = @textures[2]
+    else
+      @texture = @textures[3]
+    end
 
+  end
   def get_bound(bound)
     if bound == "left"
       return @x
@@ -57,13 +67,19 @@ class Entity
     @velY += @accelY
   end
 
-  def decellerate
+  def decelerate
     if @velX > 0
       @velX -= @friction
+      if @velX < 0
+        @velX = 0
+      end
     end
 
     if @velX < 0
       @velX+= @friction
+      if @velX > 0
+        @velX = 0
+      end
     end
 
   end
@@ -73,7 +89,9 @@ class Entity
     @x += @velX
     @y += @velY
   end
-
+  def jump
+    @velY = -10 if @on_ground
+  end
   def scan
 
 
@@ -133,7 +151,7 @@ class Entity
           smallest = 20000
           _blocks.each do |block|
 
-            p (block.get_bound('bottom')-get_bound('top')).abs
+
             if (block.get_bound('bottom')-get_bound('top')).abs < smallest
               smallest = (block.get_bound('bottom')-get_bound('top')).abs
               @above = block
@@ -155,7 +173,9 @@ class Entity
     @scanner.y = @y+1
 
     @to_the_right = nil
+
     until @scanner.x > $window_width
+
       _break = false
       _blocks = []
       $blocks.each do |block|
@@ -184,31 +204,48 @@ class Entity
       else
         @to_the_right = _blocks[0]
       end
+
       break if _break
 
       @scanner.x += 10
     end
 
 
+
     @scanner.x = @x-@width-1
 
-
+    @to_the_left = nil
     until @scanner.x+@width < 0
       _break = false
+      _blocks = []
       $blocks.each do |block|
         if Util.intersects?(@scanner, block)
-          @to_the_left = block
+          _blocks << block
 
           _break = true
-          break
 
-        else
-          @to_the_left = nil
         end
 
 
       end
+
+
+      if _blocks.size > 1
+
+        smallest = 20000
+        _blocks.each do |block|
+          _delta = (block.get_bound('right')-get_bound('left')).abs
+          if _delta < smallest
+            smallest = _delta
+            @to_the_left = block
+
+          end
+        end
+      else
+        @to_the_left = _blocks[0]
+      end
       break if _break
+
       @scanner.x -=10
     end
   end
@@ -217,30 +254,18 @@ class Entity
   def update
     unless @static
       scan
-=begin
-      if @below == nil
-        puts 'below: nil'
-      else
-        puts "below: #{@below.y}"
-      end
-      if @above == nil
-        puts 'above: nil'
-      else
-        puts "above: #{@above.y}"
-      end
-      if @to_the_right == nil
-        puts 'to_the_right: nil'
-      else
-        puts "to_the_right: #{@to_the_right.x}"
-      end
-=end
+
       @accelY = $GRAVITY
       unless @below == nil
         if @y+(@velY+@accelY)+@height > @below.y
           @y = @below.y-@height
+          @on_ground = true
           @velY = 0
           @accelY = 0
+        else
+          @on_ground = false
         end
+
 
       end
 
@@ -271,8 +296,10 @@ class Entity
 
 
       accelerate
-      decellerate
+      decelerate
       move
+
+
     end
 
   end
