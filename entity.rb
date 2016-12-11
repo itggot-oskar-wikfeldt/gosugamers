@@ -2,38 +2,22 @@ require_relative './util.rb'
 require_relative './camera.rb'
 require_relative './game_window.rb'
 require_relative './world.rb'
-#require_relative './block.rb'
-class Entity
-  def initialize(x, y, textures, static)
+require_relative './object.rb'
+class Entity < Object
+  def initialize(x, y, width, height, textures)
+    super(x, y, width, height, textures)
 
-    @bound_left = @bound_right = @bound_top = @bound_bottom = 0
     @on_ground = false
-    @texture = textures[0]
-    @textures = textures
+
     @below
     @above
     @to_the_right
     @to_the_left
-    @static = static
-    @x = x
-    @y = y
-    @max_speed = 6
-    @velX = 0
-    @velY = 0
-    @accelX = 0
-    @accelY = 0
-    @width = 0
-    @height = 0
-    @acceleration = 0.6
-    @air_resistance = 0.1
-    @friction = 0.4
-    unless @static
-      @scanner = Block.new(@x, @y, @width, @height, nil, false)
-    end
+
+    @scanner = Block.new(@x, @y, @width-2, @height-2, nil, false)
 
   end
 
-  attr_accessor :x, :y, :width, :height
   def change_tex(tex)
     if tex == 'right'
       @texture = @textures[0]
@@ -44,21 +28,7 @@ class Entity
     else
       @texture = @textures[3]
     end
-
   end
-  def get_bound(bound)
-    if bound == "left"
-      return @x
-    elsif bound == "right"
-      return @x+@width
-    elsif bound == "top"
-      return @y
-    else
-      return @y + @height
-    end
-
-  end
-
 
   def accelerate
     if (@velX+@accelX).abs < @max_speed
@@ -81,17 +51,13 @@ class Entity
         @velX = 0
       end
     end
-
   end
-
 
   def move
     @x += @velX
     @y += @velY
   end
-  def jump
-    @velY = -10 if @on_ground
-  end
+
   def scan
 
 
@@ -103,7 +69,7 @@ class Entity
 
       _break = false
       _blocks = []
-      $blocks.each do |block|
+      $objects.each do |block|
         @scanner.update
         if Util.intersects?(@scanner, block)
           _blocks << block
@@ -139,7 +105,7 @@ class Entity
     until @scanner.y+@height < 0
       _break = false
       _blocks = []
-      $blocks.each do |block|
+      $objects.each do |block|
         if Util.intersects?(@scanner, block)
           _blocks << block
 
@@ -178,7 +144,7 @@ class Entity
 
       _break = false
       _blocks = []
-      $blocks.each do |block|
+      $objects.each do |block|
         if Util.intersects?(@scanner, block)
           _blocks << block
 
@@ -211,14 +177,13 @@ class Entity
     end
 
 
-
     @scanner.x = @x-@width-1
 
     @to_the_left = nil
     until @scanner.x+@width < 0
       _break = false
       _blocks = []
-      $blocks.each do |block|
+      $objects.each do |block|
         if Util.intersects?(@scanner, block)
           _blocks << block
 
@@ -250,62 +215,59 @@ class Entity
     end
   end
 
-
   def update
-    unless @static
-      scan
+    @accelY = $GRAVITY
+    scan
 
-      @accelY = $GRAVITY
-      unless @below == nil
-        if @y+(@velY+@accelY)+@height > @below.y
-          @y = @below.y-@height
-          @on_ground = true
-          @velY = 0
-          @accelY = 0
-        else
-          @on_ground = false
-        end
-
-
+    #@accelX=$factor*@accelX
+    #@accelY=$factor*@accelY
+    #@velX=$factor*@velX
+    #@velY=$factor*@velY
+    @accelX*=1.1
+    @accelY*=1.1
+    @velX*=1.1
+    @velY*=1.1
+    @friction*=1.1
+    unless @below == nil
+      if @y+(@velY+@accelY)+@height > @below.y
+        @y = @below.y-@height
+        @on_ground = true
+        @velY = 0
+        @accelY = 0
+      else
+        @on_ground = false
       end
-
-      unless @above == nil
-        if @y+(@velY+@accelY) < @above.y+@above.height
-          @y = @above.y+@above.height
-          @velY = 0
-          @accelY = 0
-        end
-
-      end
-
-      unless @to_the_right == nil
-        if @x+(@velX+@accelX)+@width > @to_the_right.x
-          @x = @to_the_right.x-@width
-          @velX = 0
-          @accelX = 0
-        end
-      end
-
-      unless @to_the_left == nil
-        if @x+(@velX+@accelX) < @to_the_left.x+@to_the_left.width
-          @x = @to_the_left.x+@to_the_left.width
-          @velX = 0
-          @accelX = 0
-        end
-      end
-
-
-      accelerate
-      decelerate
-      move
 
 
     end
 
-  end
+    unless @above == nil
+      if @y+(@velY+@accelY) < @above.y+@above.height
+        @y = @above.y+@above.height
+        @velY = 0
+        @accelY = 0
+      end
 
-  def draw
-    @texture.draw(@x + $offsetX, @y + $offsetY, 0)
-  end
+    end
 
+    unless @to_the_right == nil
+      if @x+(@velX+@accelX)+@width > @to_the_right.x
+        @x = @to_the_right.x-@width
+        @velX = 0
+        @accelX = 0
+      end
+    end
+
+    unless @to_the_left == nil
+      if @x+(@velX+@accelX) < @to_the_left.x+@to_the_left.width
+        @x = @to_the_left.x+@to_the_left.width
+        @velX = 0
+        @accelX = 0
+      end
+    end
+
+    accelerate
+    decelerate
+    move
+  end
 end

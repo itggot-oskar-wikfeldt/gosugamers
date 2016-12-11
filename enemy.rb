@@ -1,34 +1,38 @@
-require_relative './entity.rb'
-class Enemy < Entity
+require_relative './mob.rb'
+class Enemy < Mob
   def initialize(x, y, target)
-    super(x, y, [Gosu::Image.new('./res/slime.png')], false)
-    @width = 48
-    @height = 33
+    super(x, y, 48, 33, [Gosu::Image.new('./res/slime.png')])
     @target = target
-    @scanner.height = @height-2
-    @scanner.width = width-2
-    @has_jumped = false
-    $blocks << self
+
   end
 
   def update
-    @accelX = 0
-    if (get_bound('left') > @target.get_bound('right')) && !@on_ground
-      @accelX = -1
+    unless @dead
+      @accelX = 0
+      if (get_bound('left') > @target.get_bound('right')) && !@on_ground
+        move_left
+      end
+      if (get_bound('right') < @target.get_bound('left')) && !@on_ground
+        move_right
+      end
+      if rand(100) == 0
+        jump
+      end
+
+
+      super
+      if @y > $window_height*2
+        kill
+      end
     end
-    if (get_bound('right') < @target.get_bound('left')) && !@on_ground
-      @accelX = 1
-    end
-    if rand(100) == 0
-      jump
-    end
 
-
-
-
-    super
   end
+
+
+
   def draw
-    super
+    unless @dead
+      super
+    end
   end
 end
