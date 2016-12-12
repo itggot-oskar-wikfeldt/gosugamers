@@ -20,4 +20,13 @@ class Util
     )
 
   end
+
+  def self.distance(entity1, entity2)
+    centerX_1 = entity1.x+entity1.width/2
+    centerX_2 = entity2.x+entity2.width/2
+    centerY_1 = entity1.y+entity1.height/2
+    centerY_2 = entity2.y+entity2.height/2
+
+    return Math.sqrt(((centerX_2-centerX_1)**2-(centerY_2-centerY_1)**2).abs)
+  end
 end

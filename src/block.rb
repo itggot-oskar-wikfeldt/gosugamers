@@ -1,7 +1,7 @@
-require_relative './object.rb'
+require_relative './game_object.rb'
 require_relative './world.rb'
 
-class Block < Object
+class Block < GameObject
   def initialize(x, y, width, height, tex, collidable, draw)
     if tex == 'stone'
       if collidable
@@ -22,6 +22,12 @@ class Block < Object
       width*=-1
       x-=width
     end
+
+    if height < 0
+      height*=-1
+      y-=height
+    end
+
     super(x, y, width, height, [tex], draw)
     $colliding << self if collidable
 
@@ -29,7 +35,7 @@ class Block < Object
 
 
   def draw
-    @texture.draw(@x+$offsetX, @y+$offsetY, 0, scale_x = @width, scale_y = @height, color = 0xff_ffffff, mode = :default)
+    @texture.draw(@x+$offsetX, @y+$offsetY, 0, @width, @height, 0xff_ffffff, :default)
   end
   def update
 

@@ -1,5 +1,5 @@
 require_relative './camera.rb'
-class Object
+class GameObject
   def initialize(x, y, width, height, textures, draw)
     @texture = textures[0]
     @textures = textures
@@ -13,14 +13,16 @@ class Object
   end
   attr_accessor :x, :y, :width, :height
   def get_bound(bound)
-    if bound == "left"
+    if bound == 'left'
       return @x
-    elsif bound == "right"
+    elsif bound == 'right'
       return @x+@width
-    elsif bound == "top"
+    elsif bound == 'top'
       return @y
-    else
+    elsif bound == 'bottom'
       return @y + @height
+    else
+      puts "invalid bound"
     end
 
   end

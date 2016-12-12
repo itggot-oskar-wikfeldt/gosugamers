@@ -5,6 +5,7 @@ class Player < Mob
     @left_bind = left_bind
     @right_bind = right_bind
     @jump_bind = jump_bind
+    @jump_pressed = false
 
   end
 
@@ -18,13 +19,20 @@ class Player < Mob
       move_right
       change_tex('right')
     end
-    if Gosu::button_down? @jump_bind
-      jump
+    if (Gosu::button_down? @jump_bind)
+      if !@jump_pressed
+        jump
+      end
+
+      @jump_pressed = true
+    else
+      @jump_pressed = false
     end
 
+
     if Gosu::button_down? Gosu::KbR
-      @x = $window_width/2
-      @y = 20
+      @x = 0
+      @y = 0
     end
 
 

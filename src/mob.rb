@@ -13,7 +13,9 @@ class Mob < Entity
     @dead = true
   end
   def jump
-    @velY = -13 if @on_ground
+    if @on_ground
+      @velY = -13
+    end
   end
 
   def move_left
