@@ -3,6 +3,7 @@ class Enemy < Mob
   def initialize(x, y, target)
     super(x, y, 48, 33, [Gosu::Image.new('./res/slime.png')])
     @target = target
+    @max_speed = 4
 
   end
 

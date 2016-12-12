@@ -17,7 +17,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/gosugamers@game_window.coverage" NAME="game_window Coverage Results" MODIFIED="1481337486899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="gosugamers" />
-    <SUITE FILE_PATH="coverage/gosugamers@main.coverage" NAME="main Coverage Results" MODIFIED="1481481407020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="gosugamers" />
+    <SUITE FILE_PATH="coverage/gosugamers@main.coverage" NAME="main Coverage Results" MODIFIED="1481501605611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="gosugamers" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -38,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game_window.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="game_window.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game_window.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+            <state relative-caret-position="457">
+              <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -51,9 +51,55 @@
       <file leaf-file-name="mob.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mob.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+            <state relative-caret-position="102">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="entity.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/entity.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="238" column="16" selection-start-line="238" selection-start-column="16" selection-end-line="238" selection-end-column="16" />
+              <folding>
+                <element signature="e#611#841#0" expanded="false" />
+                <element signature="e#635#835#2" expanded="false" />
+                <element signature="e#845#957#0" expanded="false" />
+                <element signature="e#864#930#0" expanded="false" />
+                <element signature="e#961#1193#0" expanded="false" />
+                <element signature="e#980#1082#0" expanded="false" />
+                <element signature="e#1034#1074#0" expanded="false" />
+                <element signature="e#1088#1187#0" expanded="false" />
+                <element signature="e#1139#1179#0" expanded="false" />
+                <element signature="e#1273#4045#0" expanded="false" />
+                <element signature="e#1358#1994#0" expanded="false" />
+                <element signature="e#1453#1607#0" expanded="false" />
+                <element signature="e#1496#1595#0" expanded="false" />
+                <element signature="e#1615#1939#0" expanded="false" />
+                <element signature="e#1681#1890#0" expanded="false" />
+                <element signature="e#1703#1878#1" expanded="false" />
+                <element signature="e#2050#2679#0" expanded="false" />
+                <element signature="e#2139#2627#0" expanded="false" />
+                <element signature="e#2158#2258#0" expanded="false" />
+                <element signature="e#2268#2615#0" expanded="false" />
+                <element signature="e#2339#2560#0" expanded="false" />
+                <element signature="e#2364#2546#1" expanded="false" />
+                <element signature="e#2763#3376#0" expanded="false" />
+                <element signature="e#2857#2990#0" expanded="false" />
+                <element signature="e#2876#2978#1" expanded="false" />
+                <element signature="e#2998#3321#0" expanded="false" />
+                <element signature="e#3065#3265#0" expanded="false" />
+                <element signature="e#3154#3253#0" expanded="false" />
+                <element signature="e#3436#4039#0" expanded="false" />
+                <element signature="e#3524#3656#0" expanded="false" />
+                <element signature="e#3543#3644#1" expanded="false" />
+                <element signature="e#3665#3986#0" expanded="false" />
+                <element signature="e#3732#3931#0" expanded="false" />
+                <element signature="e#3821#3919#0" expanded="false" />
+                <element signature="e#4209#4961#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,21 +107,9 @@
       <file leaf-file-name="player.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state relative-caret-position="391">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="entity.rb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/entity.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="229" column="18" selection-start-line="229" selection-start-column="18" selection-end-line="229" selection-end-column="18" />
-              <folding>
-                <element signature="e#427#657#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -83,8 +117,8 @@
       <file leaf-file-name="object.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/object.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="85">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -93,8 +127,8 @@
       <file leaf-file-name="enemy.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/enemy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+            <state relative-caret-position="85">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -151,12 +185,12 @@
         <option value="$PROJECT_DIR$/hsogge_util.rb" />
         <option value="$PROJECT_DIR$/util.rb" />
         <option value="$PROJECT_DIR$/object.rb" />
-        <option value="$PROJECT_DIR$/player.rb" />
-        <option value="$PROJECT_DIR$/enemy.rb" />
         <option value="$PROJECT_DIR$/block.rb" />
         <option value="$PROJECT_DIR$/mob.rb" />
-        <option value="$PROJECT_DIR$/game_window.rb" />
+        <option value="$PROJECT_DIR$/enemy.rb" />
+        <option value="$PROJECT_DIR$/player.rb" />
         <option value="$PROJECT_DIR$/entity.rb" />
+        <option value="$PROJECT_DIR$/game_window.rb" />
       </list>
     </option>
   </component>
@@ -423,15 +457,15 @@
       <workItem from="1481330917272" duration="6595000" />
       <workItem from="1481337527570" duration="1264000" />
       <workItem from="1481370808940" duration="21535000" />
-      <workItem from="1481472946597" duration="7661000" />
+      <workItem from="1481472946597" duration="11552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80796000" />
+    <option name="totallyTimeSpent" value="84687000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -508,7 +542,41 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#427#657#0" expanded="false" />
+            <element signature="e#611#841#0" expanded="false" />
+            <element signature="e#635#835#2" expanded="false" />
+            <element signature="e#845#957#0" expanded="false" />
+            <element signature="e#864#930#0" expanded="false" />
+            <element signature="e#961#1193#0" expanded="false" />
+            <element signature="e#980#1082#0" expanded="false" />
+            <element signature="e#1034#1074#0" expanded="false" />
+            <element signature="e#1088#1187#0" expanded="false" />
+            <element signature="e#1139#1179#0" expanded="false" />
+            <element signature="e#1273#4045#0" expanded="false" />
+            <element signature="e#1358#1994#0" expanded="false" />
+            <element signature="e#1453#1607#0" expanded="false" />
+            <element signature="e#1496#1595#0" expanded="false" />
+            <element signature="e#1615#1939#0" expanded="false" />
+            <element signature="e#1681#1890#0" expanded="false" />
+            <element signature="e#1703#1878#1" expanded="false" />
+            <element signature="e#2050#2679#0" expanded="false" />
+            <element signature="e#2139#2627#0" expanded="false" />
+            <element signature="e#2158#2258#0" expanded="false" />
+            <element signature="e#2268#2615#0" expanded="false" />
+            <element signature="e#2339#2560#0" expanded="false" />
+            <element signature="e#2364#2546#1" expanded="false" />
+            <element signature="e#2763#3376#0" expanded="false" />
+            <element signature="e#2857#2990#0" expanded="false" />
+            <element signature="e#2876#2978#1" expanded="false" />
+            <element signature="e#2998#3321#0" expanded="false" />
+            <element signature="e#3065#3265#0" expanded="false" />
+            <element signature="e#3154#3253#0" expanded="false" />
+            <element signature="e#3436#4039#0" expanded="false" />
+            <element signature="e#3524#3656#0" expanded="false" />
+            <element signature="e#3543#3644#1" expanded="false" />
+            <element signature="e#3665#3986#0" expanded="false" />
+            <element signature="e#3732#3931#0" expanded="false" />
+            <element signature="e#3821#3919#0" expanded="false" />
+            <element signature="e#4209#4961#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -558,7 +626,41 @@
         <state relative-caret-position="510">
           <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
           <folding>
-            <element signature="e#427#657#0" expanded="false" />
+            <element signature="e#611#841#0" expanded="false" />
+            <element signature="e#635#835#2" expanded="false" />
+            <element signature="e#845#957#0" expanded="false" />
+            <element signature="e#864#930#0" expanded="false" />
+            <element signature="e#961#1193#0" expanded="false" />
+            <element signature="e#980#1082#0" expanded="false" />
+            <element signature="e#1034#1074#0" expanded="false" />
+            <element signature="e#1088#1187#0" expanded="false" />
+            <element signature="e#1139#1179#0" expanded="false" />
+            <element signature="e#1273#4045#0" expanded="false" />
+            <element signature="e#1358#1994#0" expanded="false" />
+            <element signature="e#1453#1607#0" expanded="false" />
+            <element signature="e#1496#1595#0" expanded="false" />
+            <element signature="e#1615#1939#0" expanded="false" />
+            <element signature="e#1681#1890#0" expanded="false" />
+            <element signature="e#1703#1878#1" expanded="false" />
+            <element signature="e#2050#2679#0" expanded="false" />
+            <element signature="e#2139#2627#0" expanded="false" />
+            <element signature="e#2158#2258#0" expanded="false" />
+            <element signature="e#2268#2615#0" expanded="false" />
+            <element signature="e#2339#2560#0" expanded="false" />
+            <element signature="e#2364#2546#1" expanded="false" />
+            <element signature="e#2763#3376#0" expanded="false" />
+            <element signature="e#2857#2990#0" expanded="false" />
+            <element signature="e#2876#2978#1" expanded="false" />
+            <element signature="e#2998#3321#0" expanded="false" />
+            <element signature="e#3065#3265#0" expanded="false" />
+            <element signature="e#3154#3253#0" expanded="false" />
+            <element signature="e#3436#4039#0" expanded="false" />
+            <element signature="e#3524#3656#0" expanded="false" />
+            <element signature="e#3543#3644#1" expanded="false" />
+            <element signature="e#3665#3986#0" expanded="false" />
+            <element signature="e#3732#3931#0" expanded="false" />
+            <element signature="e#3821#3919#0" expanded="false" />
+            <element signature="e#4209#4961#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -608,7 +710,41 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#427#657#0" expanded="false" />
+            <element signature="e#611#841#0" expanded="false" />
+            <element signature="e#635#835#2" expanded="false" />
+            <element signature="e#845#957#0" expanded="false" />
+            <element signature="e#864#930#0" expanded="false" />
+            <element signature="e#961#1193#0" expanded="false" />
+            <element signature="e#980#1082#0" expanded="false" />
+            <element signature="e#1034#1074#0" expanded="false" />
+            <element signature="e#1088#1187#0" expanded="false" />
+            <element signature="e#1139#1179#0" expanded="false" />
+            <element signature="e#1273#4045#0" expanded="false" />
+            <element signature="e#1358#1994#0" expanded="false" />
+            <element signature="e#1453#1607#0" expanded="false" />
+            <element signature="e#1496#1595#0" expanded="false" />
+            <element signature="e#1615#1939#0" expanded="false" />
+            <element signature="e#1681#1890#0" expanded="false" />
+            <element signature="e#1703#1878#1" expanded="false" />
+            <element signature="e#2050#2679#0" expanded="false" />
+            <element signature="e#2139#2627#0" expanded="false" />
+            <element signature="e#2158#2258#0" expanded="false" />
+            <element signature="e#2268#2615#0" expanded="false" />
+            <element signature="e#2339#2560#0" expanded="false" />
+            <element signature="e#2364#2546#1" expanded="false" />
+            <element signature="e#2763#3376#0" expanded="false" />
+            <element signature="e#2857#2990#0" expanded="false" />
+            <element signature="e#2876#2978#1" expanded="false" />
+            <element signature="e#2998#3321#0" expanded="false" />
+            <element signature="e#3065#3265#0" expanded="false" />
+            <element signature="e#3154#3253#0" expanded="false" />
+            <element signature="e#3436#4039#0" expanded="false" />
+            <element signature="e#3524#3656#0" expanded="false" />
+            <element signature="e#3543#3644#1" expanded="false" />
+            <element signature="e#3665#3986#0" expanded="false" />
+            <element signature="e#3732#3931#0" expanded="false" />
+            <element signature="e#3821#3919#0" expanded="false" />
+            <element signature="e#4209#4961#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -650,7 +786,41 @@
         <state relative-caret-position="289">
           <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
           <folding>
-            <element signature="e#427#657#0" expanded="false" />
+            <element signature="e#611#841#0" expanded="false" />
+            <element signature="e#635#835#2" expanded="false" />
+            <element signature="e#845#957#0" expanded="false" />
+            <element signature="e#864#930#0" expanded="false" />
+            <element signature="e#961#1193#0" expanded="false" />
+            <element signature="e#980#1082#0" expanded="false" />
+            <element signature="e#1034#1074#0" expanded="false" />
+            <element signature="e#1088#1187#0" expanded="false" />
+            <element signature="e#1139#1179#0" expanded="false" />
+            <element signature="e#1273#4045#0" expanded="false" />
+            <element signature="e#1358#1994#0" expanded="false" />
+            <element signature="e#1453#1607#0" expanded="false" />
+            <element signature="e#1496#1595#0" expanded="false" />
+            <element signature="e#1615#1939#0" expanded="false" />
+            <element signature="e#1681#1890#0" expanded="false" />
+            <element signature="e#1703#1878#1" expanded="false" />
+            <element signature="e#2050#2679#0" expanded="false" />
+            <element signature="e#2139#2627#0" expanded="false" />
+            <element signature="e#2158#2258#0" expanded="false" />
+            <element signature="e#2268#2615#0" expanded="false" />
+            <element signature="e#2339#2560#0" expanded="false" />
+            <element signature="e#2364#2546#1" expanded="false" />
+            <element signature="e#2763#3376#0" expanded="false" />
+            <element signature="e#2857#2990#0" expanded="false" />
+            <element signature="e#2876#2978#1" expanded="false" />
+            <element signature="e#2998#3321#0" expanded="false" />
+            <element signature="e#3065#3265#0" expanded="false" />
+            <element signature="e#3154#3253#0" expanded="false" />
+            <element signature="e#3436#4039#0" expanded="false" />
+            <element signature="e#3524#3656#0" expanded="false" />
+            <element signature="e#3543#3644#1" expanded="false" />
+            <element signature="e#3665#3986#0" expanded="false" />
+            <element signature="e#3732#3931#0" expanded="false" />
+            <element signature="e#3821#3919#0" expanded="false" />
+            <element signature="e#4209#4961#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -785,14 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/enemy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/camera.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -805,6 +967,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/object.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -825,45 +995,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game_window.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/object.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mob.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/enemy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/player.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="391">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/entity.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="229" column="18" selection-start-line="229" selection-start-column="18" selection-end-line="229" selection-end-column="18" />
+        <state relative-caret-position="322">
+          <caret line="238" column="16" selection-start-line="238" selection-start-column="16" selection-end-line="238" selection-end-column="16" />
           <folding>
-            <element signature="e#427#657#0" expanded="false" />
+            <element signature="e#611#841#0" expanded="false" />
+            <element signature="e#635#835#2" expanded="false" />
+            <element signature="e#845#957#0" expanded="false" />
+            <element signature="e#864#930#0" expanded="false" />
+            <element signature="e#961#1193#0" expanded="false" />
+            <element signature="e#980#1082#0" expanded="false" />
+            <element signature="e#1034#1074#0" expanded="false" />
+            <element signature="e#1088#1187#0" expanded="false" />
+            <element signature="e#1139#1179#0" expanded="false" />
+            <element signature="e#1273#4045#0" expanded="false" />
+            <element signature="e#1358#1994#0" expanded="false" />
+            <element signature="e#1453#1607#0" expanded="false" />
+            <element signature="e#1496#1595#0" expanded="false" />
+            <element signature="e#1615#1939#0" expanded="false" />
+            <element signature="e#1681#1890#0" expanded="false" />
+            <element signature="e#1703#1878#1" expanded="false" />
+            <element signature="e#2050#2679#0" expanded="false" />
+            <element signature="e#2139#2627#0" expanded="false" />
+            <element signature="e#2158#2258#0" expanded="false" />
+            <element signature="e#2268#2615#0" expanded="false" />
+            <element signature="e#2339#2560#0" expanded="false" />
+            <element signature="e#2364#2546#1" expanded="false" />
+            <element signature="e#2763#3376#0" expanded="false" />
+            <element signature="e#2857#2990#0" expanded="false" />
+            <element signature="e#2876#2978#1" expanded="false" />
+            <element signature="e#2998#3321#0" expanded="false" />
+            <element signature="e#3065#3265#0" expanded="false" />
+            <element signature="e#3154#3253#0" expanded="false" />
+            <element signature="e#3436#4039#0" expanded="false" />
+            <element signature="e#3524#3656#0" expanded="false" />
+            <element signature="e#3543#3644#1" expanded="false" />
+            <element signature="e#3665#3986#0" expanded="false" />
+            <element signature="e#3732#3931#0" expanded="false" />
+            <element signature="e#3821#3919#0" expanded="false" />
+            <element signature="e#4209#4961#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_window.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

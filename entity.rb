@@ -14,6 +14,17 @@ class Entity < Object
     @to_the_right
     @to_the_left
 
+    @acceleration = 0.6
+    @air_resistance = 0.1
+    @friction = 0.4
+    @max_speed = 6
+    @velX = 0
+    @velY = 0
+    @temp_X = @x
+    @temp_Y = @y
+    @accelX = 0
+    @accelY = 0
+
     @scanner = Block.new(@x, @y, @width-2, @height-2, nil, false)
 
   end
@@ -39,14 +50,16 @@ class Entity < Object
 
   def decelerate
     if @velX > 0
-      @velX -= @friction
+
+      @velX -= @friction*$factor
+
       if @velX < 0
         @velX = 0
       end
     end
 
     if @velX < 0
-      @velX+= @friction
+      @velX+= @friction*$factor
       if @velX > 0
         @velX = 0
       end
@@ -54,8 +67,8 @@ class Entity < Object
   end
 
   def move
-    @x += @velX
-    @y += @velY
+    @temp_X += @velX*$factor
+    @temp_Y += @velY*$factor
   end
 
   def scan
@@ -219,17 +232,17 @@ class Entity < Object
     @accelY = $GRAVITY
     scan
 
-    #@accelX=$factor*@accelX
-    #@accelY=$factor*@accelY
-    #@velX=$factor*@velX
-    #@velY=$factor*@velY
-    @accelX*=1.1
-    @accelY*=1.1
-    @velX*=1.1
-    @velY*=1.1
-    @friction*=1.1
+    @accelY*=$factor
+    @accelX*=$factor
+
+    @temp_X = @x
+    @temp_Y = @y
+    accelerate
+    decelerate
+    move
+=begin
     unless @below == nil
-      if @y+(@velY+@accelY)+@height > @below.y
+      if @y+(@velY)+@height > @below.y
         @y = @below.y-@height
         @on_ground = true
         @velY = 0
@@ -242,7 +255,7 @@ class Entity < Object
     end
 
     unless @above == nil
-      if @y+(@velY+@accelY) < @above.y+@above.height
+      if @y+(@velY) < @above.y+@above.height
         @y = @above.y+@above.height
         @velY = 0
         @accelY = 0
@@ -251,7 +264,7 @@ class Entity < Object
     end
 
     unless @to_the_right == nil
-      if @x+(@velX+@accelX)+@width > @to_the_right.x
+      if @x+(@velX)+@width > @to_the_right.x
         @x = @to_the_right.x-@width
         @velX = 0
         @accelX = 0
@@ -259,15 +272,53 @@ class Entity < Object
     end
 
     unless @to_the_left == nil
-      if @x+(@velX+@accelX) < @to_the_left.x+@to_the_left.width
+      if @x+(@velX) < @to_the_left.x+@to_the_left.width
         @x = @to_the_left.x+@to_the_left.width
         @velX = 0
         @accelX = 0
       end
     end
+=end
 
-    accelerate
-    decelerate
-    move
+    unless @below == nil
+      if @temp_Y+@height > @below.y
+        @temp_Y = @below.y-@height
+        @on_ground = true
+        @velY = 0
+        @accelY = 0
+      else
+        @on_ground = false
+      end
+
+
+    end
+
+    unless @above == nil
+      if @temp_Y < @above.y+@above.height
+        @temp_Y = @above.y+@above.height
+        @velY = 0
+        @accelY = 0
+      end
+
+    end
+
+    unless @to_the_right == nil
+      if @temp_X+@width > @to_the_right.x
+        @temp_X = @to_the_right.x-@width
+        @velX = 0
+        @accelX = 0
+      end
+    end
+
+    unless @to_the_left == nil
+      if @temp_X < @to_the_left.x+@to_the_left.width
+        @temp_X = @to_the_left.x+@to_the_left.width
+        @velX = 0
+        @accelX = 0
+      end
+    end
+
+    @x = @temp_X
+    @y = @temp_Y
   end
 end

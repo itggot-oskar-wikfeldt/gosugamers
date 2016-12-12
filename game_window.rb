@@ -20,7 +20,7 @@ class GameWindow < Gosu::Window
     Block.new(0, 200, 50, 200, 'stone', true)
     Block.new($window_width-50, 200, 50, 200, 'stone', true)
 
-    @player = Player.new(350, 150)
+    @player = Player.new(450, 150)
     @enemies = []
     @prev_time = 0.0
     $delta = 0.0
@@ -57,7 +57,7 @@ class GameWindow < Gosu::Window
     Camera.update(@player)
 
     close if Gosu::button_down? Gosu::KbEscape
-    p $factor
+
   end
 
   def draw
