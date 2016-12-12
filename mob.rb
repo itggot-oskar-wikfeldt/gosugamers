@@ -4,7 +4,7 @@ class Mob < Entity
     super(x, y, width, height, tex)
     @has_jumped = false
     @dead = false
-
+-
     $objects << self
 
   end
