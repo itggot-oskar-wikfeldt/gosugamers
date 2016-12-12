@@ -49,7 +49,7 @@ class GameWindow < Gosu::Window
       @fps_avg = 0
       @count = 0
     end
-    self.caption = @fps
+    #self.caption = @fps
 
     @prev_time = Gosu::milliseconds.to_f
     @player.update
@@ -63,7 +63,7 @@ class GameWindow < Gosu::Window
   def draw
     @background.draw(0, 0, 0)
     $objects.each { |object| object.draw }
-    @fps_counter.draw(@fps, 0, 0, 0, 1, 1, 0xff_ffffff)
+    @fps_counter.draw("fps: #{@fps}", 5, 5, 0, 0.5, 0.5, 0xff_000000)
 
     #@player.draw
     #@enemies.each { |enemy| enemy.draw }
