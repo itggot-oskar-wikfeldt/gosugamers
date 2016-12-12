@@ -20,8 +20,8 @@ class Player < Mob
     end
 
     if Gosu::button_down? Gosu::KbR
-      @temp_X = $window_width/2
-      @temp_Y = 20
+      @x = $window_width/2
+      @y = 20
     end
 
 

@@ -11,14 +11,14 @@ class GameWindow < Gosu::Window
     self.caption = @caption = caption
     @background = Gosu::Image.new('./res/light_sky.jpg', :tileable => true)
 
-    5.times do |i|
+    7.times do |i|
       $objects << Block.new(i*50+100, i*10+300, 50, 30, 'stone', true)
     end
-    Block.new(300, 400, 200, 50, 'stone', true)
 
-    Block.new(0, 400, $window_width, 50, 'stone', true)
-    Block.new(0, 200, 50, 200, 'stone', true)
-    Block.new($window_width-50, 200, 50, 200, 'stone', true)
+
+    Block.new(0, $window_height-50, $window_width, 50, 'stone', true)
+    Block.new(0, $window_height-200-50, 50, 200, 'stone', true)
+    Block.new($window_width-50, $window_height-200-50, 50, 200, 'stone', true)
 
     @player = Player.new(450, 150)
     @enemies = []
@@ -31,7 +31,7 @@ class GameWindow < Gosu::Window
 
     @fps_counter = Gosu::Font.new(32)
 
-    2.times do |i|
+    1.times do |i|
       @enemies << Enemy.new(120+60*i, 20, @player)
     end
 
