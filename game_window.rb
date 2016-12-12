@@ -1,9 +1,11 @@
 require 'gosu'
+require 'thread'
 require_relative './player.rb'
 require_relative './camera.rb'
 require_relative './block.rb'
 require_relative './util.rb'
 require_relative './enemy.rb'
+require_relative './levels.rb'
 
 class GameWindow < Gosu::Window
   def initialize(caption)
@@ -11,16 +13,13 @@ class GameWindow < Gosu::Window
     self.caption = @caption = caption
     @background = Gosu::Image.new('./res/light_sky.jpg', :tileable => true)
 
-    7.times do |i|
-      $objects << Block.new(i*50+100, i*10+300, 50, 30, 'stone', true)
-    end
+
+    Levels.level1
 
 
-    Block.new(0, $window_height-50, $window_width, 50, 'stone', true)
-    Block.new(0, $window_height-200-50, 50, 200, 'stone', true)
-    Block.new($window_width-50, $window_height-200-50, 50, 200, 'stone', true)
 
-    @player = Player.new(450, 150)
+    @player = Player.new(450, 150, Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp)
+    @player2 = Player.new(400, 150,Gosu::KbA, Gosu::KbD, Gosu::KbW)
     @enemies = []
     @prev_time = 0.0
     $delta = 0.0
@@ -30,12 +29,14 @@ class GameWindow < Gosu::Window
     @fps_avg = 0
 
     @fps_counter = Gosu::Font.new(32)
-
-    1.times do |i|
+    0.times do |i|
       @enemies << Enemy.new(120+60*i, 20, @player)
     end
 
+
+
   end
+
 
   def update
 
@@ -53,14 +54,18 @@ class GameWindow < Gosu::Window
 
     @prev_time = Gosu::milliseconds.to_f
     @player.update
+    @player2.update
+
+
     @enemies.each { |enemy| enemy.update }
-    Camera.update(@player)
+    Camera.update(@player, @player2)
 
     close if Gosu::button_down? Gosu::KbEscape
 
   end
 
   def draw
+
     @background.draw(0, 0, 0)
     $objects.each { |object| object.draw }
     @fps_counter.draw("fps: #{@fps}", 5, 5, 0, 0.5, 0.5, 0xff_000000)

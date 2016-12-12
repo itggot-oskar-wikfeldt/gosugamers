@@ -1,19 +1,19 @@
 require_relative './entity.rb'
 class Mob < Entity
   def initialize(x, y, width, height, tex)
-    super(x, y, width, height, tex)
+    super(x, y, width, height, tex, true)
     @has_jumped = false
     @dead = false
--
-    $objects << self
+
+    $colliding << self
 
   end
   def kill
-    $objects.delete(self)
+    $colliding.delete(self)
     @dead = true
   end
   def jump
-    @velY = -12 if @on_ground
+    @velY = -13 if @on_ground
   end
 
   def move_left
@@ -22,6 +22,7 @@ class Mob < Entity
   def move_right
     @accelX = 1
   end
+
   def draw
     super unless @dead
   end

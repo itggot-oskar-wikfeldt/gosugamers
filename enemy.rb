@@ -19,12 +19,12 @@ class Enemy < Mob
       if rand(100) == 0
         jump
       end
-
-
-      super
       if @y > $window_height*2
         kill
       end
+
+      super
+
     end
 
   end

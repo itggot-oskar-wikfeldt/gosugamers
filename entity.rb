@@ -1,11 +1,10 @@
 require_relative './util.rb'
-require_relative './camera.rb'
 require_relative './game_window.rb'
 require_relative './world.rb'
 require_relative './object.rb'
 class Entity < Object
-  def initialize(x, y, width, height, textures)
-    super(x, y, width, height, textures)
+  def initialize(x, y, width, height, textures, draw)
+    super(x, y, width, height, textures, draw)
 
     @on_ground = false
 
@@ -25,7 +24,7 @@ class Entity < Object
     @accelX = 0
     @accelY = 0
 
-    @scanner = Block.new(@x, @y, @width-2, @height-2, nil, false)
+    @scanner = Block.new(@x, @y, @width-2, @height-2, nil, false, false)
 
   end
 
@@ -42,17 +41,15 @@ class Entity < Object
   end
 
   def accelerate
-    if (@velX+@accelX).abs < @max_speed
-      @velX += @accelX
+    if (@velX+@accelX*$factor).abs < @max_speed
+      @velX += @accelX*$factor
     end
-    @velY += @accelY
+    @velY += @accelY*$factor
   end
 
   def decelerate
     if @velX > 0
-
       @velX -= @friction*$factor
-
       if @velX < 0
         @velX = 0
       end
@@ -78,11 +75,11 @@ class Entity < Object
     @scanner.x = @x+1
 
     @below = nil
-    until @scanner.y > $window_height
+    until @scanner.y > @y + 200
 
       _break = false
       _blocks = []
-      $objects.each do |block|
+      $colliding.each do |block|
         @scanner.update
         if Util.intersects?(@scanner, block)
           _blocks << block
@@ -115,10 +112,10 @@ class Entity < Object
 
 
     @above = nil
-    until @scanner.y+@height < 0
+    until @scanner.y+@height < @y-200
       _break = false
       _blocks = []
-      $objects.each do |block|
+      $colliding.each do |block|
         if Util.intersects?(@scanner, block)
           _blocks << block
 
@@ -153,11 +150,11 @@ class Entity < Object
 
     @to_the_right = nil
 
-    until @scanner.x > $window_width
+    until @scanner.x > @x + 200
 
       _break = false
       _blocks = []
-      $objects.each do |block|
+      $colliding.each do |block|
         if Util.intersects?(@scanner, block)
           _blocks << block
 
@@ -193,10 +190,10 @@ class Entity < Object
     @scanner.x = @x-@width-1
 
     @to_the_left = nil
-    until @scanner.x+@width < 0
+    until @scanner.x+@width < @x - 200
       _break = false
       _blocks = []
-      $objects.each do |block|
+      $colliding.each do |block|
         if Util.intersects?(@scanner, block)
           _blocks << block
 
@@ -232,53 +229,11 @@ class Entity < Object
     @accelY = $GRAVITY
     scan
 
-    @accelY*=$factor
-    @accelX*=$factor
-
     @temp_X = @x
     @temp_Y = @y
     accelerate
     decelerate
     move
-=begin
-    unless @below == nil
-      if @y+(@velY)+@height > @below.y
-        @y = @below.y-@height
-        @on_ground = true
-        @velY = 0
-        @accelY = 0
-      else
-        @on_ground = false
-      end
-
-
-    end
-
-    unless @above == nil
-      if @y+(@velY) < @above.y+@above.height
-        @y = @above.y+@above.height
-        @velY = 0
-        @accelY = 0
-      end
-
-    end
-
-    unless @to_the_right == nil
-      if @x+(@velX)+@width > @to_the_right.x
-        @x = @to_the_right.x-@width
-        @velX = 0
-        @accelX = 0
-      end
-    end
-
-    unless @to_the_left == nil
-      if @x+(@velX) < @to_the_left.x+@to_the_left.width
-        @x = @to_the_left.x+@to_the_left.width
-        @velX = 0
-        @accelX = 0
-      end
-    end
-=end
 
     unless @below == nil
       if @temp_Y+@height > @below.y

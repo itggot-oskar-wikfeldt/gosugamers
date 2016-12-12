@@ -1,5 +1,6 @@
+require_relative './camera.rb'
 class Object
-  def initialize(x, y, width, height, textures)
+  def initialize(x, y, width, height, textures, draw)
     @texture = textures[0]
     @textures = textures
     @bound_left = @bound_right = @bound_top = @bound_bottom = 0
@@ -7,6 +8,7 @@ class Object
     @height = height
     @x = x
     @y = y
+    $objects << self if draw
 
   end
   attr_accessor :x, :y, :width, :height
@@ -23,6 +25,6 @@ class Object
 
   end
   def draw
-    @texture.draw(@x, @y, 0)
+    @texture.draw(@x+$offsetX, @y+$offsetY, 0)
   end
 end
