@@ -32,7 +32,7 @@ class Player < Mob
 
     if Gosu::button_down? Gosu::KbR
       @x = 0
-      @y = 0
+      @y = -300
       @velY = 0
     end
 

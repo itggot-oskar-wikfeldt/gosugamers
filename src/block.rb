@@ -27,7 +27,6 @@ class Block < GameObject
       height*=-1
       y-=height
     end
-
     super(x, y, width, height, [tex], draw)
     $colliding << self if collidable
 

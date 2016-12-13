@@ -12,6 +12,7 @@ class GameWindow < Gosu::Window
     Camera.initialize
     self.caption = @caption = caption
     @background = Gosu::Image.new('../res/light_sky_big.jpg', :tileable => true)
+    @ground = Gosu::Image.new('../res/dirt.jpg', :tileable => true)
     @loading_screen = Gosu::Image.new('../res/loading.png', :tileable => true)
 
 
@@ -19,11 +20,11 @@ class GameWindow < Gosu::Window
 
 
 
-    @player = Player.new(0, 0, Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp)
-    @player2 = Player.new(42, 0,Gosu::KbA, Gosu::KbD, Gosu::KbW)
+    @player = Player.new(0, -300, Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp)
+    @player2 = Player.new(50, -300,Gosu::KbA, Gosu::KbD, Gosu::KbW)
     @enemies = []
     4.times do |i|
-      @enemies << Enemy.new(300, -200-i*100, [@player, @player2])
+      @enemies << Enemy.new(-500+i*500, -500, [@player, @player2])
     end
 
     @prev_time = 0.0
@@ -80,12 +81,13 @@ class GameWindow < Gosu::Window
       @loading_screen.draw(0, 0, 0, $window_width.to_f/1920, $window_height.to_f/1080)
     else
       @background.draw(0, 0, 0, $window_width.to_f/1920, $window_height.to_f/1080)
+      @ground.draw(0,$offsetY, 0, $window_width.to_f/1920, $window_height.to_f/1080)
       $objects.each { |object| object.draw }
       @text.draw("fps: #{@fps}", 5, 5, 0, 0.5, 0.5, 0xff_000000)
       @text.draw("player 1: #{@player.x.round(2)}", 5, 30, 0, 0.5, 0.5, 0xff_000000)
       @text.draw("player 2: #{@player2.x.round(2)}", 5, 45, 0, 0.5, 0.5, 0xff_000000)
-      @text.draw("; #{@player.y.round(2)}", 120, 30, 0, 0.5, 0.5, 0xff_000000)
-      @text.draw("; #{@player2.y.round(2)}", 120, 45, 0, 0.5, 0.5, 0xff_000000)
+      @text.draw("; #{(@player.y+@player.height).round(2)}", 120, 30, 0, 0.5, 0.5, 0xff_000000)
+      @text.draw("; #{(@player2.y+@player2.height).round(2)}", 120, 45, 0, 0.5, 0.5, 0xff_000000)
     end
 
 

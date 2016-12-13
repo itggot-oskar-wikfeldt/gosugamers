@@ -14,6 +14,7 @@ class Enemy < Mob
   def update
     unless @dead
       _smallest_dist = Util.distance(@targets[0], self)
+      @target = @targets[0]
       @targets.each do |target|
         next if target == @targets[0]
         d = Util.distance(target, self)
@@ -22,11 +23,9 @@ class Enemy < Mob
           _smallest_dist = d
         end
       end
-      @target = @targets[0]
       @jump = false
       @touched.each do |touched|
         if touched.is_a?(Entity)
-          p "-------------"
           @jump = true if rand(20) == 0
         end
       end
@@ -60,7 +59,6 @@ class Enemy < Mob
       end
 
       super
-      p
 
     end
 
