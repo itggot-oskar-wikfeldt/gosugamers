@@ -5,16 +5,16 @@ class Block < GameObject
   def initialize(x, y, width, height, tex, collidable, draw)
     if tex == 'stone'
       if collidable
-        tex = Gosu::Image.new('./res/stone.png', :tileable => true)
+        tex = Gosu::Image.new('../res/stone.png', :tileable => true)
       else
-        tex = Gosu::Image.new('./res/stone_inactive.png', :tileable => true)
+        tex = Gosu::Image.new('../res/stone_inactive.png', :tileable => true)
       end
 
     elsif tex == 'grass'
       if collidable
-        tex = Gosu::Image.new('./res/grass.png', :tileable => true)
+        tex = Gosu::Image.new('../res/grass.png', :tileable => true)
       else
-        tex = Gosu::Image.new('./res/grass_inactive.png', :tileable => true)
+        tex = Gosu::Image.new('../res/grass_inactive.png', :tileable => true)
       end
 
     end

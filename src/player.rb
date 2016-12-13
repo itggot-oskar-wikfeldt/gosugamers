@@ -1,7 +1,7 @@
 require_relative './mob.rb'
 class Player < Mob
   def initialize(x, y, left_bind, right_bind, jump_bind)
-    super(x, y, 42, 39, [Gosu::Image.new('./res/bunny_right.png'), Gosu::Image.new('./res/bunny_left.png')])
+    super(x, y, 42, 39, [Gosu::Image.new('../res/bunny_right.png'), Gosu::Image.new('../res/bunny_left.png')])
     @left_bind = left_bind
     @right_bind = right_bind
     @jump_bind = jump_bind
@@ -33,6 +33,7 @@ class Player < Mob
     if Gosu::button_down? Gosu::KbR
       @x = 0
       @y = 0
+      @velY = 0
     end
 
 

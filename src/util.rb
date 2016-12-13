@@ -29,4 +29,19 @@ class Util
 
     return Math.sqrt(((centerX_2-centerX_1)**2-(centerY_2-centerY_1)**2).abs)
   end
+
+  def self.closest(a, b_ary, bound)
+    _smallest = (b_ary[0].get_bound(bound)-a).abs
+    _closest = b_ary[0]
+    b_ary.each do |object|
+      next if object == b_ary[0]
+
+      if (object.get_bound(bound)-a).abs < _smallest
+        _smallest = (object.get_bound(bound)-a).abs
+        _closest = object
+      end
+    end
+    return _closest
+  end
+
 end

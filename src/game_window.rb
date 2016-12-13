@@ -8,11 +8,11 @@ require_relative './levels.rb'
 
 class GameWindow < Gosu::Window
   def initialize(caption)
-    super($window_width = 1920, $window_height = 1080, true)
+    super($window_width = 1600, $window_height = 900, true)
     Camera.initialize
     self.caption = @caption = caption
-    @background = Gosu::Image.new('./res/light_sky_big.jpg', :tileable => true)
-    @loading_screen = Gosu::Image.new('./res/loading.png', :tileable => true)
+    @background = Gosu::Image.new('../res/light_sky_big.jpg', :tileable => true)
+    @loading_screen = Gosu::Image.new('../res/loading.png', :tileable => true)
 
 
     Levels.level1
@@ -22,7 +22,7 @@ class GameWindow < Gosu::Window
     @player = Player.new(0, 0, Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp)
     @player2 = Player.new(42, 0,Gosu::KbA, Gosu::KbD, Gosu::KbW)
     @enemies = []
-    5.times do |i|
+    3.times do |i|
       @enemies << Enemy.new(300, -200-i*100, [@player, @player2])
     end
 
