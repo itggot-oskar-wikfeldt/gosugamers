@@ -1,4 +1,4 @@
-require_relative './entity.rb'
+require_relative 'entity'
 class Mob < Entity
   def initialize(x, y, width, height, tex)
     super(x, y, width, height, tex, true)
@@ -19,10 +19,20 @@ class Mob < Entity
   end
 
   def move_left
-    @accelX = -1
+    if @on_ground
+      _acceleration = @acceleration
+    else
+      _acceleration = @air_acceleration
+    end
+    @accelX = -_acceleration
   end
   def move_right
-    @accelX = 1
+    if @on_ground
+      _acceleration = @acceleration
+    else
+      _acceleration = @air_acceleration
+    end
+    @accelX = _acceleration
   end
 
   def draw

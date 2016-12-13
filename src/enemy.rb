@@ -1,4 +1,4 @@
-require_relative './mob.rb'
+require_relative 'mob'
 class Enemy < Mob
   def initialize(x, y, targets)
     super(x, y, 48, 33, [Gosu::Image.new('../res/slime.png')])

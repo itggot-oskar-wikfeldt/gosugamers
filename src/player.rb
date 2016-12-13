@@ -1,4 +1,4 @@
-require_relative './mob.rb'
+require_relative 'mob'
 class Player < Mob
   def initialize(x, y, left_bind, right_bind, jump_bind)
     super(x, y, 42, 39, [Gosu::Image.new('../res/bunny_right.png'), Gosu::Image.new('../res/bunny_left.png')])

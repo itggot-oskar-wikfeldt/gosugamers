@@ -1,24 +1,54 @@
-#require_relative './entity'
 class Util
+
+  def self.in_between?(num1, num2, num3)
+    return ((num1 > num2) && (num1 < num3)) || ((num1 < num2) && (num1 > num3))
+  end
+
   def self.intersects?(entity1, entity2)
 
     return (
+
+
     (
-    (entity1.get_bound('top').between?(entity2.get_bound('top'), entity2.get_bound('bottom'))) ||
-        (entity1.get_bound('bottom').between?(entity2.get_bound('top'), entity2.get_bound('bottom'))) ||
+    (
+    in_between?(entity1.get_bound('top'), entity2.get_bound('top'), entity2.get_bound('bottom')) ||
+        in_between?(entity1.get_bound('bottom'), entity2.get_bound('top'), entity2.get_bound('bottom')) ||
 
-        (entity2.get_bound('top').between?(entity1.get_bound('top'), entity1.get_bound('bottom'))) ||
-        (entity2.get_bound('bottom').between?(entity1.get_bound('top'), entity1.get_bound('bottom')))
-    )&&
+        in_between?(entity2.get_bound('top'), entity1.get_bound('top'), entity1.get_bound('bottom')) ||
+        in_between?(entity2.get_bound('bottom'), entity1.get_bound('top'), entity1.get_bound('bottom'))
+    )&&(
+    in_between?(entity1.get_bound('left'), entity2.get_bound('left'), entity2.get_bound('right')) ||
+        in_between?(entity1.get_bound('right'), entity2.get_bound('left'), entity2.get_bound('right')) ||
+
+        in_between?(entity2.get_bound('left'), entity1.get_bound('left'), entity1.get_bound('right')) ||
+        in_between?(entity2.get_bound('right'), entity1.get_bound('left'), entity1.get_bound('right'))
+    )
+    ) || (
+    (
+    ((entity1.get_bound('top') == entity2.get_bound('top')) && (entity1.get_bound('bottom') == entity2.get_bound('bottom')))&&(
+    ((entity1.get_bound('left') == entity2.get_bound('left')) && (entity1.get_bound('right') == entity2.get_bound('right'))) ||
         (
-        (entity1.get_bound('left').between?(entity2.get_bound('left'), entity2.get_bound('right'))) ||
-            (entity1.get_bound('right').between?(entity2.get_bound('left'), entity2.get_bound('right'))) ||
+        in_between?(entity1.get_bound('left'), entity2.get_bound('left'), entity2.get_bound('right')) ||
+            in_between?(entity1.get_bound('right'), entity2.get_bound('left'), entity2.get_bound('right')) ||
 
-            (entity2.get_bound('left').between?(entity1.get_bound('left'), entity1.get_bound('right'))) ||
-            (entity2.get_bound('right').between?(entity1.get_bound('left'), entity1.get_bound('right')))
+            in_between?(entity2.get_bound('left'), entity1.get_bound('left'), entity1.get_bound('right')) ||
+            in_between?(entity2.get_bound('right'), entity1.get_bound('left'), entity1.get_bound('right'))
         )
+    ))||(
+    ((entity1.get_bound('left') == entity2.get_bound('left')) && (entity1.get_bound('right') == entity2.get_bound('right')))&&(
+    ((entity1.get_bound('top') == entity2.get_bound('top')) && (entity1.get_bound('bottom') == entity2.get_bound('bottom'))) ||
+        (
+        in_between?(entity1.get_bound('top'), entity2.get_bound('top'), entity2.get_bound('bottom')) ||
+            in_between?(entity1.get_bound('bottom'), entity2.get_bound('top'), entity2.get_bound('bottom')) ||
+
+            in_between?(entity2.get_bound('top'), entity1.get_bound('top'), entity1.get_bound('bottom')) ||
+            in_between?(entity2.get_bound('bottom'), entity1.get_bound('top'), entity1.get_bound('bottom'))
+        )
+    ))
+
     )
 
+    )
   end
 
   def self.distance(entity1, entity2)

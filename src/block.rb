@@ -1,8 +1,8 @@
-require_relative './game_object.rb'
-require_relative './world.rb'
+require_relative 'game_object'
+require_relative 'world'
 
 class Block < GameObject
-  def initialize(x, y, width, height, tex, collidable, draw)
+  def initialize(x, y, width, height, tex, collidable)
     if tex == 'stone'
       if collidable
         tex = Gosu::Image.new('../res/stone.png', :tileable => true)
@@ -16,8 +16,8 @@ class Block < GameObject
       else
         tex = Gosu::Image.new('../res/grass_inactive.png', :tileable => true)
       end
-
     end
+
     if width < 0
       width*=-1
       x-=width
@@ -26,6 +26,9 @@ class Block < GameObject
     if height < 0
       height*=-1
       y-=height
+    end
+    unless tex == nil
+      draw = true
     end
     super(x, y, width, height, [tex], draw)
     $colliding << self if collidable

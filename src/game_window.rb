@@ -1,29 +1,26 @@
 require 'gosu'
-require_relative './player.rb'
-#require_relative './camera.rb'
-require_relative './block.rb'
-require_relative './util.rb'
-require_relative './enemy.rb'
-require_relative './levels.rb'
+require_relative 'player'
+require_relative 'block'
+require_relative 'util'
+require_relative 'enemy'
+require_relative 'levels'
 
 class GameWindow < Gosu::Window
+  include Gosu
   def initialize(caption)
-    super($window_width = 1600, $window_height = 900, true)
+    super($window_width = 1280, $window_height = 720, false)
     Camera.initialize
     self.caption = @caption = caption
-    @background = Gosu::Image.new('../res/light_sky_big.jpg', :tileable => true)
+    @background = Image.new('../res/light_sky_big.jpg', :tileable => true)
     @ground = Gosu::Image.new('../res/dirt.jpg', :tileable => true)
-    @loading_screen = Gosu::Image.new('../res/loading.png', :tileable => true)
-
+    @loading_screen = Image.new('../res/loading.png', :tileable => true)
 
     Levels.level1
-
-
 
     @player = Player.new(0, -300, Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp)
     @player2 = Player.new(50, -300,Gosu::KbA, Gosu::KbD, Gosu::KbW)
     @enemies = []
-    4.times do |i|
+    0.times do |i|
       @enemies << Enemy.new(-500+i*500, -500, [@player, @player2])
     end
 
@@ -35,14 +32,8 @@ class GameWindow < Gosu::Window
     @fps = 0
     @fps_avg = 0
 
-
     @text = Gosu::Font.new(32)
-
-
-
-
   end
-
 
   def update
     $timepassed = Gosu::milliseconds.to_f/1000
@@ -86,8 +77,8 @@ class GameWindow < Gosu::Window
       @text.draw("fps: #{@fps}", 5, 5, 0, 0.5, 0.5, 0xff_000000)
       @text.draw("player 1: #{@player.x.round(2)}", 5, 30, 0, 0.5, 0.5, 0xff_000000)
       @text.draw("player 2: #{@player2.x.round(2)}", 5, 45, 0, 0.5, 0.5, 0xff_000000)
-      @text.draw("; #{(@player.y+@player.height).round(2)}", 120, 30, 0, 0.5, 0.5, 0xff_000000)
-      @text.draw("; #{(@player2.y+@player2.height).round(2)}", 120, 45, 0, 0.5, 0.5, 0xff_000000)
+      @text.draw("; #{(@player.get_bound('bottom')).round(2)}", 120, 30, 0, 0.5, 0.5, 0xff_000000)
+      @text.draw("; #{(@player2.get_bound('bottom')).round(2)}", 120, 45, 0, 0.5, 0.5, 0xff_000000)
     end
 
 

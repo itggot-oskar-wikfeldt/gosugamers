@@ -1,14 +1,15 @@
-require_relative './util.rb'
-require_relative './game_window.rb'
-require_relative './world.rb'
-require_relative './game_object.rb'
+require_relative 'util'
+require_relative 'game_window'
+require_relative 'world'
+require_relative 'game_object'
 class Entity < GameObject
   def initialize(x, y, width, height, textures, draw)
     super(x, y, width, height, textures, draw)
 
     @on_ground = false
 
-    @acceleration = 0.6
+    @acceleration = 0.55
+    @air_acceleration = 0.2
     @air_resistance = 0.1
     @friction = 0.4
     @max_speed = 6
@@ -23,10 +24,10 @@ class Entity < GameObject
     @touched = []
 
     @margin = 2
-    @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2), nil, false,   false)
-    @hitbox_bottom =  Block.new(@x+@margin/2,       get_bound('bottom'),  @width-@margin,   (@max_speed+2), nil, false,     false)
-    @hitbox_left =    Block.new(@x,                 @y+@margin/2,         -(@max_speed+2),  @height-@margin, nil, false,    false)
-    @hitbox_right =   Block.new(get_bound('right'), @y+@margin/2,         (@max_speed+2),   @height-@margin, nil, false,    false)
+    @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2), nil, false)
+    @hitbox_bottom =  Block.new(@x+@margin/2,       get_bound('bottom'),  @width-@margin,   (@max_speed+2),   nil, false)
+    @hitbox_left =    Block.new(@x,                 @y+@margin/2,         -(@max_speed+2),  @height-@margin,  nil, false)
+    @hitbox_right =   Block.new(get_bound('right'), @y+@margin/2,         (@max_speed+2),   @height-@margin,  nil, false)
 
   end
 
@@ -43,6 +44,7 @@ class Entity < GameObject
   end
 
   def accelerate
+
     if (@velX+@accelX*$factor).abs < @max_speed
 
       @velX += @accelX*$factor
@@ -53,15 +55,21 @@ class Entity < GameObject
   end
 
   def decelerate
+    if @on_ground
+      _deceleration = @friction*$factor
+    else
+      _deceleration = @air_resistance*$factor
+    end
+
     if @velX > 0
-      @velX -= @friction*$factor
+      @velX -= _deceleration
       if @velX < 0
         @velX = 0
       end
     end
 
     if @velX < 0
-      @velX+= @friction*$factor
+      @velX += _deceleration
       if @velX > 0
         @velX = 0
       end
@@ -100,7 +108,7 @@ class Entity < GameObject
 
     @hitbox_top.x = @x+@margin/2
     @hitbox_bottom.x = @x+@margin/2
-    @hitbox_top.y = @y
+    @hitbox_top.y = @y-@hitbox_top.height
     @hitbox_bottom.y = get_bound('bottom')
     @on_ground = false
     $colliding.each do |object|
@@ -142,7 +150,7 @@ class Entity < GameObject
     moveX
     @temp_X = @x
 
-    @hitbox_left.x = @x
+    @hitbox_left.x = @x-@hitbox_left.width
     @hitbox_right.x = get_bound('right')
     @hitbox_left.y = @y+@margin/2
     @hitbox_right.y = @y+@margin/2
@@ -183,5 +191,11 @@ class Entity < GameObject
 
     @x=@temp_X
     @y=@temp_Y
+    $colliding.each do |object|
+      next if object == self
+      if Util.intersects?(self, object)
+        @x -= @velX*$factor
+      end
+    end
   end
 end
