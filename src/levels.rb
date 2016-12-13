@@ -2,10 +2,10 @@ require_relative './block.rb'
 class Levels
   def self.level1
     3.times do |i|
-      Block.new(i*75+75, i*50+50, 75, 50, 'grass', true, true)
+      Block.new(i*75+75, i*50+50+25, 75, 25, 'grass', true, true)
     end
     3.times do |i|
-      Block.new((-i-1)*75-75, i*50+50, 75, 50, 'grass', true, true)
+      Block.new((-i-1)*75-75, i*50+50+25, 75, 25, 'grass', true, true)
     end
     3.times do |i|
       Block.new(i*75+75, i*50+100, 75, 50, 'grass', false, true)

@@ -2,7 +2,7 @@ require_relative './entity.rb'
 class Mob < Entity
   def initialize(x, y, width, height, tex)
     super(x, y, width, height, tex, true)
-    @has_jumped = false
+
     @dead = false
 
     $colliding << self

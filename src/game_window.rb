@@ -22,7 +22,7 @@ class GameWindow < Gosu::Window
     @player = Player.new(0, 0, Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp)
     @player2 = Player.new(42, 0,Gosu::KbA, Gosu::KbD, Gosu::KbW)
     @enemies = []
-    3.times do |i|
+    4.times do |i|
       @enemies << Enemy.new(300, -200-i*100, [@player, @player2])
     end
 
@@ -52,7 +52,6 @@ class GameWindow < Gosu::Window
       begin
         @fps_avg += (1/($delta/1000)).to_i
       rescue FloatDomainError
-          p "hello"
       end
 
 

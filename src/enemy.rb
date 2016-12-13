@@ -5,43 +5,54 @@ class Enemy < Mob
     @targets = targets
     @target
     @max_speed = 4
-    @moved_left = false
-    @moved_right = false
+    @jump = false
+    @moving_left = false
+    @moving_right = false
 
   end
 
   def update
     unless @dead
       _smallest_dist = Util.distance(@targets[0], self)
-      @target = @targets[0]
-
       @targets.each do |target|
-
         next if target == @targets[0]
-
         d = Util.distance(target, self)
         if d < _smallest_dist
           @target = target
-          d = _smallest_dist
+          _smallest_dist = d
         end
+      end
+      @target = @targets[0]
+      @jump = false
+      @touched.each do |touched|
+        if touched.is_a?(Entity)
+          p "-------------"
+          @jump = true if rand(20) == 0
+        end
+      end
 
+      if rand(100) == 0
+        @jump = true
       end
 
 
       if @on_ground
-        @moved_left = false
-        @moved_right = false
+        @moving_left = false
+        @moving_right = false
       end
+
+
       @accelX = 0
-      if (get_bound('left') > @target.get_bound('right')) && !@on_ground && !@moved_right
+      if (get_bound('left') > @target.get_bound('right')) && (@moving_left || @jump)
         move_left
-        @moved_left = true
+        @moving_left = true
       end
-      if (get_bound('right') < @target.get_bound('left')) && !@on_ground && !@moved_left
+      if (get_bound('right') < @target.get_bound('left')) && (@moving_right || @jump)
         move_right
-        @moved_right = true
+        @moving_right = true
       end
-      if rand(100) == 0
+
+      if @jump
         jump
       end
       if @y > $window_height*2
@@ -49,11 +60,11 @@ class Enemy < Mob
       end
 
       super
+      p
 
     end
 
   end
-
 
 
   def draw

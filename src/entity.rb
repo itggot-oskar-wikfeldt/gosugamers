@@ -20,6 +20,7 @@ class Entity < GameObject
     @prev_Y = @y
     @accelX = 0
     @accelY = 0
+    @touched = []
 
     @margin = 2
     @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2), nil, false,   false)
@@ -93,6 +94,8 @@ class Entity < GameObject
     _to_the_lefts = []
     _to_the_rigths = []
 
+    @touched = []
+
 
 
     @hitbox_top.x = @x+@margin/2
@@ -123,11 +126,15 @@ class Entity < GameObject
     end
     @y = @prev_Y
     unless _aboves.empty?
-      @temp_Y = Util.closest(get_bound('top'), _aboves, 'bottom').get_bound('bottom')
+      _above = Util.closest(get_bound('top'), _aboves, 'bottom')
+      @temp_Y = _above.get_bound('bottom')
+      @touched << _above
     end
 
     unless _belows.empty?
-      @temp_Y = Util.closest(get_bound('bottom'), _belows, 'top').get_bound('top')-@height
+      _below = Util.closest(get_bound('bottom'), _belows, 'top')
+      @temp_Y = _below.get_bound('top')-@height
+      @touched << _below
     end
 
 
@@ -161,11 +168,16 @@ class Entity < GameObject
     end
     @x = @prev_X
     unless _to_the_rigths.empty?
-      @temp_X = Util.closest(get_bound('right'), _to_the_rigths, 'left').get_bound('left')-@width
+      _to_the_right = Util.closest(get_bound('right'), _to_the_rigths, 'left')
+      @temp_X = _to_the_right.get_bound('left')-@width
+      @touched << _to_the_right
+
     end
 
     unless _to_the_lefts.empty?
-      @temp_X = Util.closest(get_bound('left'), _to_the_lefts, 'right').get_bound('right')
+      _to_the_left = Util.closest(get_bound('left'), _to_the_lefts, 'right')
+      @temp_X = _to_the_left.get_bound('right')
+      @touched << _to_the_left
     end
 
 
