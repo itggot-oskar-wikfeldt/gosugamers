@@ -5,7 +5,7 @@ class Mob < Entity
 
     @dead = false
 
-    $colliding << self
+    # $colliding << self
 
   end
   def kill
@@ -14,7 +14,7 @@ class Mob < Entity
   end
   def jump
     if @on_ground
-      @velY = -13
+      @velY = -12
     end
   end
 
@@ -25,6 +25,11 @@ class Mob < Entity
       _acceleration = @air_acceleration
     end
     @accelX = -_acceleration
+
+    if @velX <= 0 && @velX >=-1
+      @velX = -1
+    end
+
   end
   def move_right
     if @on_ground
@@ -33,6 +38,9 @@ class Mob < Entity
       _acceleration = @air_acceleration
     end
     @accelX = _acceleration
+    if @velX >= 0 && @velX <=1
+      @velX = 1
+    end
   end
 
   def draw

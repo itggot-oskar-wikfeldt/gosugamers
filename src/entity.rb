@@ -11,8 +11,8 @@ class Entity < GameObject
     @acceleration = 0.55
     @air_acceleration = 0.2
     @air_resistance = 0.1
-    @friction = 0.4
-    @max_speed = 6
+    @friction = 0.3
+    @max_speed = 5
     @velX = 0
     @velY = 0
     @temp_X = @x
@@ -24,10 +24,10 @@ class Entity < GameObject
     @touched = []
 
     @margin = 2
-    @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2), nil, false)
-    @hitbox_bottom =  Block.new(@x+@margin/2,       get_bound('bottom'),  @width-@margin,   (@max_speed+2),   nil, false)
-    @hitbox_left =    Block.new(@x,                 @y+@margin/2,         -(@max_speed+2),  @height-@margin,  nil, false)
-    @hitbox_right =   Block.new(get_bound('right'), @y+@margin/2,         (@max_speed+2),   @height-@margin,  nil, false)
+    @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2+10), 'stone', false)
+    @hitbox_bottom =  Block.new(@x+@margin/2,       get_bound('bottom'),  @width-@margin,   (@max_speed+2+10),   'stone', false)
+    @hitbox_left =    Block.new(@x,                 @y+@margin/2,         -(@max_speed+2),  @height-@margin-10,  'stone', false)
+    @hitbox_right =   Block.new(get_bound('right'), @y+@margin/2,         (@max_speed+2),   @height-@margin-10,  'stone', false)
 
   end
 
@@ -91,6 +91,11 @@ class Entity < GameObject
 
     @accelY = $GRAVITY
 
+    @hitbox_top.x = @x+@margin/2
+    @hitbox_bottom.x = @x+@margin/2
+    @hitbox_top.y = @y-@hitbox_top.height
+    @hitbox_bottom.y = get_bound('bottom')
+
     accelerate
     decelerate
     moveY
@@ -106,10 +111,10 @@ class Entity < GameObject
 
 
 
-    @hitbox_top.x = @x+@margin/2
-    @hitbox_bottom.x = @x+@margin/2
-    @hitbox_top.y = @y-@hitbox_top.height
-    @hitbox_bottom.y = get_bound('bottom')
+    #@hitbox_top.x = @x+@margin/2
+    #@hitbox_bottom.x = @x+@margin/2
+    #@hitbox_top.y = @y-@hitbox_top.height
+    #@hitbox_bottom.y = get_bound('bottom')
     @on_ground = false
     $colliding.each do |object|
       next if object == self
@@ -150,10 +155,10 @@ class Entity < GameObject
     moveX
     @temp_X = @x
 
-    @hitbox_left.x = @x-@hitbox_left.width
-    @hitbox_right.x = get_bound('right')
-    @hitbox_left.y = @y+@margin/2
-    @hitbox_right.y = @y+@margin/2
+    #@hitbox_left.x = @x-@hitbox_left.width
+    #@hitbox_right.x = get_bound('right')
+    #@hitbox_left.y = @y+@margin/2
+    #@hitbox_right.y = @y+@margin/2
 
 
 
@@ -194,6 +199,7 @@ class Entity < GameObject
     $colliding.each do |object|
       next if object == self
       if Util.intersects?(self, object)
+        #p "hello"
         @x -= @velX*$factor
       end
     end

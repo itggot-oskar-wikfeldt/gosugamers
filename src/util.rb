@@ -65,7 +65,7 @@ class Util
     _closest = b_ary[0]
     b_ary.each do |object|
       next if object == b_ary[0]
-
+      p "hello" if b_ary.size > 1
       if (object.get_bound(bound)-a).abs < _smallest
         _smallest = (object.get_bound(bound)-a).abs
         _closest = object
