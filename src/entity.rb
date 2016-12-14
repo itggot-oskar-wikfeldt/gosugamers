@@ -96,6 +96,12 @@ class Entity < GameObject
     @hitbox_top.y = @y-@hitbox_top.height
     @hitbox_bottom.y = get_bound('bottom')
 
+    @hitbox_left.x = @x-@hitbox_left.width
+    @hitbox_right.x = get_bound('right')
+    @hitbox_left.y = @y+@margin/2
+    @hitbox_right.y = @y+@margin/2
+
+
     accelerate
     decelerate
     moveY
@@ -199,8 +205,7 @@ class Entity < GameObject
     $colliding.each do |object|
       next if object == self
       if Util.intersects?(self, object)
-        #p "hello"
-        @x -= @velX*$factor
+        @y -= @velY*$factor*0+1
       end
     end
   end

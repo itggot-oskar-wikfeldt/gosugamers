@@ -13,8 +13,8 @@ class Levels
     Block.new(-2*75, -2*50, 4*75, 50, 'grass', false)
     Block.new(-3*75, -1*50, 6*75, 50, 'grass', false)
 
-    Block.new(-5*75, 0, 75, -5, 'grass', true)
-    Block.new(4*75, 0, 75, -5, 'grass', true)
+    Block.new(-5*75, 0, 75, -11, 'grass', true)
+    Block.new(4*75, 0, 75, -11, 'grass', true)
 
     Block.new(-2000, 0, 4000, 50, nil, true)
 
