@@ -24,10 +24,12 @@ class Entity < GameObject
     @touched = []
 
     @margin = 2
-    @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2+10), 'stone', false)
-    @hitbox_bottom =  Block.new(@x+@margin/2,       get_bound('bottom'),  @width-@margin,   (@max_speed+2+10),   'stone', false)
+    @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2+10), nil, false)
+    @hitbox_bottom =  Block.new(@x+@margin/2,       get_bound('bottom'),  @width-@margin,   (@max_speed+2+10),   nil, false)
     @hitbox_left =    Block.new(@x,                 @y+@margin/2,         -(@max_speed+2),  @height-@margin-10,  'stone', false)
     @hitbox_right =   Block.new(get_bound('right'), @y+@margin/2,         (@max_speed+2),   @height-@margin-10,  'stone', false)
+
+    @hitbox_half_player = Block.new(@x, @y+@height/2,         @width,   @height/2,  nil, false)
 
   end
 
@@ -101,7 +103,20 @@ class Entity < GameObject
     @hitbox_left.y = @y+@margin/2
     @hitbox_right.y = @y+@margin/2
 
+    @hitbox_half_player.x = @x
+    @hitbox_half_player.y = @y+@height/2
+=begin
+    $colliding.each do |object|
+      next if object == self
+      if Util.intersects?(@hitbox_half_player, object)
+        @y = object.get_bound('top')-@height
+      end
 
+      if Util.intersects?(self, object)
+        @x -= @velX
+      end
+    end
+=end
     accelerate
     decelerate
     moveY
@@ -202,11 +217,32 @@ class Entity < GameObject
 
     @x=@temp_X
     @y=@temp_Y
+
+    @hitbox_half_player.x = @x
+    @hitbox_half_player.y = @y+@height/2
+
     $colliding.each do |object|
       next if object == self
-      if Util.intersects?(self, object)
-        @y -= @velY*$factor*0+1
+      if Util.intersects?(@hitbox_half_player, object)
+        @y = object.get_bound('top')-@height
+        $colliding.each do |obj|
+          next if obj == self
+          if Util.intersects?(self, obj)
+            @y = obj.get_bound('bottom')
+            if @velX > 0
+              @x = object.get_bound('left')
+            else
+              @x = object.get_bound('right')
+            end
+
+          end
+        end
+
       end
+
+
     end
+
+
   end
 end

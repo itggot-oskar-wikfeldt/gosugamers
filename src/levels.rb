@@ -8,18 +8,27 @@ class Levels
       Block.new(-i*75+225, -i*50, 75, -50, 'grass', false)
     end
 
+    20.times do |i|
+      Block.new(-i*10-700, -i*10, 10, -10, 'stone', true)
+    end
+
+    #20.times do |i|
+    #  Block.new(-i*10-900, i*10-200, 10, 10, 'stone', true)
+    #end
+    #Block.new(-1000, -200, 500, 10, 'stone', true)
+
+
     Block.new(-1*75, -3*50, 2*75, -25, 'grass', true)
     Block.new(-1*75, -3*50, 2*75, 50, 'grass', false)
     Block.new(-2*75, -2*50, 4*75, 50, 'grass', false)
     Block.new(-3*75, -1*50, 6*75, 50, 'grass', false)
 
-    Block.new(-5*75, 0, 75, -11, 'grass', true)
-    Block.new(4*75, 0, 75, -11, 'grass', true)
+    Block.new(-5*75, 0, 75, -25, 'grass', true)
+    Block.new(4*75, 0, 75, -25, 'grass', true)
 
     Block.new(-2000, 0, 4000, 50, nil, true)
 
-    Block.new(-500, 0, 100, -50, 'stone', true)
-    Block.new(-400, 0, 100, -50, 'stone', true)
+
 
 
 

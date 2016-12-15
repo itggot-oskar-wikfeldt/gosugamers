@@ -3,7 +3,7 @@ class Camera
   def self.initialize
     $offsetX = ($window_width/2)
     $offsetY = ($window_height/2)
-    @camera_speed = 3
+    @camera_speed = 10
   end
 
   def self.update(focus1, focus2)

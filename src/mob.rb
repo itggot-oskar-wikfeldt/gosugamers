@@ -5,7 +5,7 @@ class Mob < Entity
 
     @dead = false
 
-    # $colliding << self
+    #$colliding << self
 
   end
   def kill
