@@ -17,8 +17,8 @@ class GameWindow < Gosu::Window
 
     Levels.level1
 
-    @player = Player.new(0, -300, Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp)
-    @player2 = Player.new(50, -300,Gosu::KbA, Gosu::KbD, Gosu::KbW)
+    @player = Player.new(0, -300, [Gosu::KbLeft, Gosu::KbRight, Gosu::KbUp, Gosu::KbRightControl], true)
+    @player2 = Player.new(50, -300, [Gosu::KbA, Gosu::KbD, Gosu::KbW, Gosu::KbSpace], false)
     @enemies = []
     0.times do |i|
       @enemies << Enemy.new(-500+i*500, -500, [@player, @player2])

@@ -4,8 +4,8 @@ class Mob < Entity
     super(x, y, width, height, tex, true)
 
     @dead = false
-
-    #$colliding << self
+    @attack_time
+    $colliding << self
 
   end
   def kill
@@ -41,6 +41,10 @@ class Mob < Entity
     if @velX >= 0 && @velX <=1
       @velX = 1
     end
+  end
+
+  def attack
+    
   end
 
   def draw

@@ -9,7 +9,7 @@ class Levels
     end
 
     20.times do |i|
-      Block.new(-i*10-700, -i*10, 10, -10, 'stone', true)
+      Block.new(-i*16-700, -i*8, 16, -8, 'stone', true)
     end
 
     #20.times do |i|

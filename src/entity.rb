@@ -21,13 +21,14 @@ class Entity < GameObject
     @prev_Y = @y
     @accelX = 0
     @accelY = 0
+    @direction = 'left'
     @touched = []
 
     @margin = 2
     @hitbox_top =     Block.new(@x+@margin/2,       @y,                   @width-@margin,    -(@max_speed+2+10), nil, false)
     @hitbox_bottom =  Block.new(@x+@margin/2,       get_bound('bottom'),  @width-@margin,   (@max_speed+2+10),   nil, false)
-    @hitbox_left =    Block.new(@x,                 @y+@margin/2,         -(@max_speed+2),  @height-@margin-10,  'stone', false)
-    @hitbox_right =   Block.new(get_bound('right'), @y+@margin/2,         (@max_speed+2),   @height-@margin-10,  'stone', false)
+    @hitbox_left =    Block.new(@x,                 @y+@margin/2,         -(@max_speed+2),  @height-@margin-10,  nil, false)
+    @hitbox_right =   Block.new(get_bound('right'), @y+@margin/2,         (@max_speed+2),   @height-@margin-10,  nil, false)
 
     @hitbox_half_player = Block.new(@x, @y+@height/2,         @width,   @height/2,  nil, false)
 
