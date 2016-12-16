@@ -1,7 +1,7 @@
 require_relative 'mob'
 class Enemy < Mob
   def initialize(x, y, targets)
-    super(x, y, 48, 33, [Gosu::Image.new('../res/slime.png')])
+    super(x, y, 48, 33, [Gosu::Image.new('../res/slime.png')], nil)
     @targets = targets
     @target
     @max_speed = 4

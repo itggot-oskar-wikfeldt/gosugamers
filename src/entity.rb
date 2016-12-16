@@ -4,10 +4,11 @@ require_relative 'world'
 require_relative 'game_object'
 class Entity < GameObject
   def initialize(x, y, width, height, textures, draw)
+    textures[base_tex] = textures
     super(x, y, width, height, textures, draw)
 
     @on_ground = false
-
+    @textures = textures
     @acceleration = 0.55
     @air_acceleration = 0.2
     @air_resistance = 0.1
@@ -36,13 +37,13 @@ class Entity < GameObject
 
   def change_tex(tex)
     if tex == 'right'
-      @texture = @textures[0]
+      @texture = @textures[right]
     elsif tex == 'left'
-      @texture = @textures[1]
+      @texture = @textures[left]
     elsif tex == 'up'
-      @texture = @textures[2]
+      @texture = @textures[up]
     else
-      @texture = @textures[3]
+      @texture = @textures[down]
     end
   end
 

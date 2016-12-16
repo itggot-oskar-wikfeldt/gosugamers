@@ -1,8 +1,7 @@
 require_relative './camera.rb'
 class GameObject
   def initialize(x, y, width, height, textures, draw)
-    @texture = textures[0]
-    @textures = textures
+    @texture = textures[base_tex]
     @bound_left = @bound_right = @bound_top = @bound_bottom = 0
     @width = width
     @height = height
